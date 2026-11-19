@@ -1,0 +1,4604 @@
+﻿<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>English Adventure ป.4 - เว็บแอพเรียนภาษาอังกฤษแสนสนุก</title>
+  <meta name="description" content="สื่อการสอนภาษาอังกฤษ ป.4 ตรงตามหลักสูตรแกนกลาง พร้อมระบบอ่านออกเสียง มินิเกม และเกียรติบัตร">
+  <!-- Stylesheets -->
+  <style>
+/* Google Fonts: Mali (น่ารักสำหรับเด็ก) และ Nunito */
+@import url('https://fonts.googleapis.com/css2?family=Mali:ital,wght@0,400;0,600;0,700;1,400&family=Nunito:wght@400;600;700;800;900&display=swap');
+
+:root {
+  --font-main: 'Nunito', 'Mali', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-thai: 'Mali', cursive, sans-serif;
+  
+  --bg-main: #f0fdf4;
+  --bg-gradient: linear-gradient(135deg, #e0f2fe 0%, #fef3c7 50%, #f0fdf4 100%);
+  --card-bg: #ffffff;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  
+  --primary: #3b82f6;
+  --primary-hover: #2563eb;
+  --primary-light: #dbeafe;
+  --secondary: #f59e0b;
+  --accent: #10b981;
+  --danger: #ef4444;
+  --purple: #8b5cf6;
+
+  --shadow-sm: 0 2px 4px rgba(0,0,0,0.06);
+  --shadow-md: 0 6px 16px rgba(0,0,0,0.08);
+  --shadow-lg: 0 12px 28px rgba(0,0,0,0.12);
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
+  --radius-full: 9999px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: var(--font-main);
+  background: var(--bg-gradient);
+  min-height: 100vh;
+  color: var(--text-main);
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+/* Background floating decorative bubbles */
+.bg-decor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.decor-bubble {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.25;
+  filter: blur(40px);
+  animation: floatSlow 12s infinite ease-in-out alternate;
+}
+.decor-bubble-1 { width: 350px; height: 350px; background: #60a5fa; top: -50px; left: -50px; }
+.decor-bubble-2 { width: 300px; height: 300px; background: #fcd34d; bottom: 50px; right: -50px; animation-duration: 15s; }
+.decor-bubble-3 { width: 250px; height: 250px; background: #6ee7b7; top: 40%; left: 80%; animation-duration: 10s; }
+
+@keyframes floatSlow {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(25px, 20px) scale(1.08); }
+}
+
+/* App Wrapper */
+.app-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 20px 80px;
+}
+
+/* Header Section */
+.app-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  padding: 16px 24px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  border: 2px solid #ffffff;
+  margin-bottom: 24px;
+}
+
+.brand-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+}
+
+.brand-mascot-avatar {
+  font-size: 2.8rem;
+  background: #fef08a;
+  border-radius: var(--radius-full);
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+  border: 3px solid #facc15;
+  animation: gentleBounce 2.5s infinite ease-in-out;
+}
+
+@keyframes gentleBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.brand-text h1 {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #1e3a8a;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brand-badge {
+  background: #ef4444;
+  color: white;
+  font-size: 0.75rem;
+  padding: 2px 10px;
+  border-radius: var(--radius-full);
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.brand-text p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-family: var(--font-thai);
+}
+
+/* Header User Stats & Controls */
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.stat-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f8fafc;
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid #e2e8f0;
+  font-weight: 700;
+  font-size: 0.95rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.stat-pill.stars {
+  background: #fefce8;
+  border-color: #fef08a;
+  color: #b45309;
+}
+
+.stat-pill.user-profile {
+  cursor: pointer;
+  background: #eff6ff;
+  border-color: #bfdbfe;
+  color: #1d4ed8;
+  transition: all 0.2s;
+}
+
+.stat-pill.user-profile:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-icon {
+  background: white;
+  border: 1.5px solid #e2e8f0;
+  border-radius: var(--radius-full);
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-icon:hover {
+  background: #f1f5f9;
+  transform: scale(1.05);
+}
+
+/* Navigation Bar */
+.main-nav {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 6px 4px 16px;
+  margin-bottom: 20px;
+  scrollbar-width: thin;
+}
+
+.main-nav::-webkit-scrollbar {
+  height: 6px;
+}
+.main-nav::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.nav-tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 2px solid transparent;
+  border-radius: var(--radius-md);
+  font-family: var(--font-thai);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text-main);
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-tab-btn .tab-icon {
+  font-size: 1.35rem;
+}
+
+.nav-tab-btn:hover {
+  transform: translateY(-2px);
+  background: #ffffff;
+  box-shadow: var(--shadow-md);
+}
+
+.nav-tab-btn.active {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: #ffffff;
+  border-color: #60a5fa;
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.35);
+  transform: translateY(-2px);
+}
+
+/* Unit Banner & Selector Bar */
+.unit-selector-bar {
+  background: white;
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-sm);
+  border: 1.5px solid #e2e8f0;
+  flex-wrap: wrap;
+}
+
+.unit-info-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.unit-info-badge {
+  font-size: 2.2rem;
+  width: 52px;
+  height: 52px;
+  background: #ecfeff;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #a5f3fc;
+}
+
+.unit-title-text h2 {
+  font-size: 1.25rem;
+  color: #0f172a;
+  font-weight: 800;
+}
+
+.unit-title-text p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-family: var(--font-thai);
+}
+
+.unit-picker-select {
+  padding: 10px 18px;
+  font-family: var(--font-thai);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1e3a8a;
+  background: #eff6ff;
+  border: 2px solid #93c5fd;
+  border-radius: var(--radius-full);
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.unit-picker-select:hover {
+  background: #dbeafe;
+}
+
+/* Tab Panels */
+.tab-content {
+  display: none;
+}
+.tab-content.active {
+  display: block;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- VIEW 1: UNITS OVERVIEW --- */
+.units-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  gap: 20px;
+}
+
+.unit-card {
+  background: white;
+  border-radius: var(--radius-md);
+  padding: 22px;
+  box-shadow: var(--shadow-md);
+  border: 2px solid #e2e8f0;
+  cursor: pointer;
+  transition: all 0.28s;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.unit-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: var(--card-accent, #3b82f6);
+}
+
+.unit-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: #93c5fd;
+}
+
+.unit-card-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.unit-card-icon {
+  font-size: 2.4rem;
+  width: 58px;
+  height: 58px;
+  background: #f8fafc;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #e2e8f0;
+}
+
+.unit-card-title h3 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #1e293b;
+}
+.unit-card-title .th-title {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-family: var(--font-thai);
+}
+
+.unit-card-desc {
+  font-size: 0.9rem;
+  color: #475569;
+  font-family: var(--font-thai);
+  margin-bottom: 18px;
+  flex-grow: 1;
+}
+
+.unit-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px dashed #e2e8f0;
+  padding-top: 14px;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.unit-badge-count {
+  background: #f1f5f9;
+  color: #475569;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+}
+
+.btn-start-unit {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-thai);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-start-unit:hover {
+  background: #2563eb;
+  transform: scale(1.05);
+}
+
+/* Mascot Welcome Banner */
+.mascot-banner {
+  background: linear-gradient(135deg, #fef08a, #fed7aa);
+  border: 3px solid #fbbf24;
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-shadow: var(--shadow-md);
+  position: relative;
+}
+
+.mascot-big-avatar {
+  font-size: 4rem;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+}
+
+.mascot-banner-text h2 {
+  font-size: 1.4rem;
+  color: #78350f;
+  font-weight: 900;
+  margin-bottom: 4px;
+}
+
+.mascot-banner-text p {
+  color: #92400e;
+  font-size: 0.95rem;
+  font-family: var(--font-thai);
+}
+
+/* --- VIEW 2: FLASHCARDS --- */
+.flashcards-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.search-input-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: white;
+  border: 2px solid #e2e8f0;
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  flex: 1;
+  max-width: 380px;
+  box-shadow: var(--shadow-sm);
+}
+
+.search-input-box input {
+  border: none;
+  outline: none;
+  font-family: var(--font-thai);
+  font-size: 0.95rem;
+  width: 100%;
+}
+
+.grammar-toggle-btn {
+  background: #ecfdf5;
+  color: #065f46;
+  border: 2px solid #a7f3d0;
+  padding: 9px 18px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-thai);
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+.grammar-toggle-btn:hover {
+  background: #d1fae5;
+}
+
+/* Grammar Tip Drawer */
+.grammar-box {
+  background: #ecfdf5;
+  border: 2px solid #6ee7b7;
+  border-radius: var(--radius-md);
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-sm);
+  display: none;
+}
+.grammar-box.show {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+.grammar-box h3 {
+  color: #065f46;
+  font-size: 1.15rem;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.grammar-rule-item {
+  background: white;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 8px;
+  border-left: 4px solid #10b981;
+}
+
+.grammar-rule-point {
+  font-weight: 700;
+  color: #047857;
+  font-family: var(--font-thai);
+}
+.grammar-rule-example {
+  color: #475569;
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+/* Cards Grid */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.word-card {
+  background: white;
+  border-radius: var(--radius-md);
+  padding: 20px;
+  box-shadow: var(--shadow-md);
+  border: 2px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  transition: all 0.25s ease;
+}
+
+.word-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: #93c5fd;
+}
+
+.word-card-emoji {
+  font-size: 3.5rem;
+  margin-bottom: 10px;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.08));
+}
+
+.word-card-word {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #1e3a8a;
+  letter-spacing: -0.3px;
+}
+
+.word-card-phonetic {
+  font-size: 0.9rem;
+  color: #ea580c;
+  font-family: var(--font-thai);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.word-card-thai {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0f172a;
+  font-family: var(--font-thai);
+  margin-bottom: 12px;
+}
+
+.word-card-example {
+  background: #f8fafc;
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  width: 100%;
+  text-align: left;
+  font-size: 0.85rem;
+  margin-bottom: 14px;
+  border-left: 3px solid #3b82f6;
+}
+
+.word-card-example .en {
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 2px;
+}
+
+.word-card-example .th {
+  color: #64748b;
+  font-family: var(--font-thai);
+}
+
+.word-card-actions {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  margin-top: auto;
+}
+
+.btn-speak-word {
+  flex: 1;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+  transition: all 0.2s;
+}
+
+.btn-speak-word:hover {
+  background: #1e40af;
+  transform: scale(1.02);
+}
+
+.btn-speak-slow {
+  background: #fef3c7;
+  color: #b45309;
+  border: 1.5px solid #fde047;
+  padding: 10px 14px;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-speak-slow:hover {
+  background: #fde047;
+}
+
+/* --- VIEW 3: DIALOGUE LAB --- */
+.dialogue-container {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  box-shadow: var(--shadow-md);
+  border: 2px solid #e2e8f0;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.dialogue-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.dialogue-header h3 {
+  font-size: 1.4rem;
+  color: #1e3a8a;
+  font-weight: 900;
+}
+.dialogue-header p {
+  color: var(--text-muted);
+  font-family: var(--font-thai);
+}
+
+.dialogue-speakers-bar {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1.5px dashed #e2e8f0;
+}
+
+.speaker-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f8fafc;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid #e2e8f0;
+  font-size: 0.9rem;
+  font-weight: 700;
+  font-family: var(--font-thai);
+}
+
+.dialogue-chat-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.chat-bubble-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.chat-bubble-row.right {
+  flex-direction: row-reverse;
+}
+
+.chat-avatar {
+  font-size: 2.2rem;
+  width: 50px;
+  height: 50px;
+  background: #f1f5f9;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #e2e8f0;
+  flex-shrink: 0;
+}
+
+.chat-bubble {
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 14px 18px;
+  max-width: 75%;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.chat-bubble:hover {
+  border-color: #93c5fd;
+  transform: translateY(-2px);
+}
+
+.chat-bubble.right-bubble {
+  background: #eff6ff;
+  border-color: #bfdbfe;
+}
+
+.chat-bubble.speaking-now {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+  background: #f0fdf4;
+}
+
+.chat-text-en {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 4px;
+}
+
+.chat-text-th {
+  font-size: 0.9rem;
+  color: #64748b;
+  font-family: var(--font-thai);
+}
+
+.btn-play-all-dialogue {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-thai);
+  font-weight: 700;
+  font-size: 1.05rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 0 auto;
+  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.3);
+  transition: all 0.2s;
+}
+
+.btn-play-all-dialogue:hover {
+  background: #047857;
+  transform: scale(1.03);
+}
+
+/* --- VIEW 4: MINI GAMES --- */
+.games-hub-menu {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.game-select-card {
+  background: white;
+  border: 2px solid #e2e8f0;
+  border-radius: var(--radius-md);
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.25s;
+  box-shadow: var(--shadow-sm);
+}
+
+.game-select-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: #60a5fa;
+}
+
+.game-select-card.active {
+  border-color: #3b82f6;
+  background: #eff6ff;
+  box-shadow: 0 6px 18px rgba(59, 130, 246, 0.2);
+}
+
+.game-select-icon {
+  font-size: 2.8rem;
+  margin-bottom: 8px;
+}
+.game-select-card h4 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #1e3a8a;
+  margin-bottom: 4px;
+}
+.game-select-card p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-family: var(--font-thai);
+}
+
+.game-play-area {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  box-shadow: var(--shadow-md);
+  border: 2px solid #e2e8f0;
+  min-height: 420px;
+}
+
+/* Game 1: Spelling Scramble */
+.spelling-board {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.spelling-emoji-display {
+  font-size: 4.5rem;
+  margin-bottom: 10px;
+  animation: pulseSlow 2s infinite ease-in-out;
+}
+
+@keyframes pulseSlow {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+.spelling-thai-hint {
+  font-size: 1.35rem;
+  font-family: var(--font-thai);
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 6px;
+}
+
+.spelling-sound-hint {
+  margin-bottom: 24px;
+}
+
+.spelling-answer-boxes {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.spelling-box {
+  width: 48px;
+  height: 56px;
+  border-bottom: 4px solid #3b82f6;
+  background: #f8fafc;
+  border-radius: 8px 8px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #1e3a8a;
+  text-transform: uppercase;
+}
+
+.spelling-tiles-pool {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.letter-tile-btn {
+  background: linear-gradient(135deg, #fef08a, #facc15);
+  border: 2px solid #eab308;
+  border-radius: 12px;
+  width: 50px;
+  height: 54px;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #713f12;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #ca8a04;
+  transition: all 0.1s;
+  text-transform: uppercase;
+}
+
+.letter-tile-btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #ca8a04;
+}
+
+.letter-tile-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  transform: translateY(3px);
+  box-shadow: none;
+}
+
+.spelling-controls-row {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.btn-game-action {
+  padding: 10px 20px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-thai);
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+}
+
+.btn-game-delete {
+  background: #fee2e2;
+  color: #dc2626;
+  border: 1.5px solid #fca5a5;
+}
+.btn-game-delete:hover { background: #fecaca; }
+
+.btn-game-hint {
+  background: #fef3c7;
+  color: #b45309;
+  border: 1.5px solid #fde047;
+}
+.btn-game-hint:hover { background: #fde047; }
+
+/* Game 2: Matching Grid */
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+.memory-card {
+  background: #f1f5f9;
+  border: 2px solid #cbd5e1;
+  border-radius: var(--radius-md);
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  font-weight: 800;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s;
+  padding: 8px;
+  text-align: center;
+}
+
+.memory-card:hover {
+  transform: scale(1.04);
+  border-color: #93c5fd;
+}
+
+.memory-card.flipped {
+  background: white;
+  border-color: #3b82f6;
+  box-shadow: var(--shadow-sm);
+}
+
+.memory-card.matched {
+  background: #dcfce7;
+  border-color: #86efac;
+  color: #15803d;
+  cursor: default;
+  transform: scale(0.96);
+}
+
+/* Game 3: Listening Quiz */
+.listen-game-box {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.listen-play-big-btn {
+  background: linear-gradient(135deg, #ec4899, #be185d);
+  color: white;
+  border: none;
+  border-radius: var(--radius-full);
+  width: 90px;
+  height: 90px;
+  font-size: 2.4rem;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(190, 24, 93, 0.35);
+  margin: 10px auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.listen-play-big-btn:hover {
+  transform: scale(1.08);
+}
+
+.listen-options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.listen-option-card {
+  background: white;
+  border: 2px solid #e2e8f0;
+  border-radius: var(--radius-md);
+  padding: 16px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.listen-option-card:hover {
+  border-color: #3b82f6;
+  background: #eff6ff;
+  transform: translateY(-3px);
+}
+
+.listen-option-card.correct {
+  background: #dcfce7 !important;
+  border-color: #22c55e !important;
+  color: #15803d !important;
+}
+
+.listen-option-card.wrong {
+  background: #fee2e2 !important;
+  border-color: #ef4444 !important;
+  color: #b91c1c !important;
+}
+
+/* --- VIEW 5: UNIT QUIZ --- */
+.quiz-container {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  box-shadow: var(--shadow-md);
+  border: 2px solid #e2e8f0;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.quiz-progress-bar-container {
+  width: 100%;
+  height: 12px;
+  background: #e2e8f0;
+  border-radius: var(--radius-full);
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.quiz-progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #10b981);
+  width: 20%;
+  border-radius: var(--radius-full);
+  transition: width 0.3s ease;
+}
+
+.quiz-question-header {
+  margin-bottom: 20px;
+}
+
+.quiz-question-num {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #3b82f6;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.quiz-question-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 6px;
+}
+
+.quiz-question-thai {
+  font-size: 1rem;
+  color: var(--text-muted);
+  font-family: var(--font-thai);
+}
+
+.quiz-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.quiz-option-btn {
+  background: #f8fafc;
+  border: 2px solid #cbd5e1;
+  border-radius: var(--radius-md);
+  padding: 14px 20px;
+  text-align: left;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.2s;
+}
+
+.quiz-option-btn:hover {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+}
+
+.quiz-option-btn.selected-correct {
+  background: #dcfce7;
+  border-color: #22c55e;
+  color: #15803d;
+}
+
+.quiz-option-btn.selected-wrong {
+  background: #fee2e2;
+  border-color: #ef4444;
+  color: #b91c1c;
+}
+
+.quiz-feedback-box {
+  background: #eff6ff;
+  border: 2px solid #bfdbfe;
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  font-family: var(--font-thai);
+  margin-bottom: 20px;
+  display: none;
+}
+.quiz-feedback-box.show { display: block; animation: fadeIn 0.25s ease; }
+
+.btn-next-question {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-thai);
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  transition: all 0.2s;
+}
+
+.btn-next-question:hover {
+  background: #1e40af;
+  transform: scale(1.03);
+}
+
+/* Quiz Finished Card */
+.quiz-result-card {
+  text-align: center;
+  padding: 20px;
+}
+
+.quiz-result-icon {
+  font-size: 4.5rem;
+  margin-bottom: 12px;
+}
+
+.quiz-result-score {
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: #1e3a8a;
+  margin-bottom: 8px;
+}
+
+.quiz-result-stars {
+  font-size: 2rem;
+  color: #f59e0b;
+  margin-bottom: 16px;
+}
+
+.quiz-result-msg {
+  font-size: 1.15rem;
+  font-family: var(--font-thai);
+  color: #334155;
+  margin-bottom: 24px;
+}
+
+/* --- VIEW 6: ACHIEVEMENTS & CERTIFICATE --- */
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 36px;
+}
+
+.badge-card {
+  background: white;
+  border: 2px solid #e2e8f0;
+  border-radius: var(--radius-md);
+  padding: 18px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s;
+}
+
+.badge-card.locked {
+  filter: grayscale(1);
+  opacity: 0.6;
+}
+
+.badge-card-icon {
+  font-size: 2.8rem;
+  margin-bottom: 8px;
+}
+.badge-card h4 {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #1e293b;
+  margin-bottom: 4px;
+}
+.badge-card p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-family: var(--font-thai);
+}
+
+/* Printable Certificate Frame */
+.certificate-preview-wrapper {
+  background: white;
+  padding: 30px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  border: 2px solid #cbd5e1;
+  margin-bottom: 30px;
+}
+
+.certificate-border-outer {
+  border: 12px double #b45309;
+  padding: 36px 30px;
+  background: #fffdfa;
+  position: relative;
+  text-align: center;
+  border-radius: 8px;
+}
+
+.cert-corner-decor {
+  position: absolute;
+  font-size: 2rem;
+  color: #b45309;
+}
+.cert-corner-tl { top: 10px; left: 10px; }
+.cert-corner-tr { top: 10px; right: 10px; }
+.cert-corner-bl { bottom: 10px; left: 10px; }
+.cert-corner-br { bottom: 10px; right: 10px; }
+
+.cert-emblem {
+  font-size: 4rem;
+  margin-bottom: 10px;
+}
+
+.cert-header h2 {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #78350f;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 4px;
+}
+
+.cert-header p {
+  font-size: 1.15rem;
+  color: #92400e;
+  font-family: var(--font-thai);
+  margin-bottom: 16px;
+}
+
+.cert-student-name {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #1e3a8a;
+  border-bottom: 3px solid #f59e0b;
+  display: inline-block;
+  padding: 4px 30px;
+  margin: 12px 0 16px;
+  font-family: var(--font-thai);
+}
+
+.cert-reason {
+  font-size: 1.1rem;
+  color: #451a03;
+  font-family: var(--font-thai);
+  line-height: 1.8;
+  max-width: 650px;
+  margin: 0 auto 28px;
+}
+
+.cert-footer-row {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  margin-top: 36px;
+}
+
+.cert-signature-line {
+  border-top: 2px dashed #78350f;
+  width: 180px;
+  padding-top: 6px;
+  font-family: var(--font-thai);
+  font-size: 0.9rem;
+  color: #78350f;
+}
+
+.cert-date {
+  font-family: var(--font-thai);
+  font-size: 0.9rem;
+  color: #78350f;
+}
+
+.btn-print-cert {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: white;
+  border: none;
+  padding: 14px 32px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-thai);
+  font-weight: 800;
+  font-size: 1.15rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px auto 0;
+  box-shadow: 0 6px 18px rgba(245, 158, 11, 0.35);
+  transition: all 0.2s;
+}
+
+.btn-print-cert:hover {
+  background: #b45309;
+  transform: scale(1.03);
+}
+
+/* Profile Edit Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.25s ease;
+}
+
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-content {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 30px;
+  max-width: 440px;
+  width: 90%;
+  box-shadow: var(--shadow-lg);
+  transform: translateY(20px);
+  transition: all 0.25s ease;
+}
+
+.modal-overlay.open .modal-content {
+  transform: translateY(0);
+}
+
+.modal-content h3 {
+  font-size: 1.3rem;
+  color: #1e3a8a;
+  margin-bottom: 16px;
+  font-family: var(--font-thai);
+}
+
+.avatar-selector {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.avatar-opt {
+  font-size: 2.2rem;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  transition: all 0.15s;
+}
+.avatar-opt:hover { transform: scale(1.15); }
+.avatar-opt.selected {
+  border-color: #3b82f6;
+  background: #eff6ff;
+}
+
+.form-group {
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 700;
+  font-family: var(--font-thai);
+  margin-bottom: 6px;
+  color: #334155;
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 2px solid #cbd5e1;
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  font-family: var(--font-thai);
+  outline: none;
+}
+.form-input:focus { border-color: #3b82f6; }
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+/* Floating Mascot Helper */
+.floating-mascot-helper {
+  position: fixed;
+  bottom: 20px;
+  right: 24px;
+  z-index: 90;
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  pointer-events: none;
+}
+
+.mascot-speech-bubble {
+  background: white;
+  border: 2px solid #facc15;
+  border-radius: 18px;
+  padding: 10px 16px;
+  box-shadow: var(--shadow-md);
+  font-family: var(--font-thai);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #713f12;
+  max-width: 240px;
+  pointer-events: auto;
+  position: relative;
+  animation: floatBubble 4s infinite ease-in-out;
+}
+
+.mascot-speech-bubble::after {
+  content: '';
+  position: absolute;
+  right: -8px;
+  bottom: 15px;
+  border-width: 8px 0 8px 8px;
+  border-style: solid;
+  border-color: transparent transparent transparent white;
+}
+
+.mascot-bubble-avatar {
+  font-size: 3rem;
+  pointer-events: auto;
+  cursor: pointer;
+  background: #fef08a;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-md);
+  border: 2px solid #facc15;
+  transition: transform 0.2s;
+}
+
+.mascot-bubble-avatar:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+
+@keyframes floatBubble {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+/* Responsive Queries */
+@media (max-width: 768px) {
+  .app-container { padding: 10px 12px 90px; }
+  .app-header { padding: 12px 16px; }
+  .brand-text h1 { font-size: 1.3rem; }
+  .memory-grid { grid-template-columns: repeat(3, 1fr); }
+  .cert-border-outer { padding: 20px 14px; }
+  .cert-header h2 { font-size: 1.6rem; }
+  .cert-student-name { font-size: 1.6rem; }
+  .floating-mascot-helper { display: none; }
+}
+
+/* Print Style Sheet for Certificate */
+@media print {
+  body {
+    background: none !important;
+    color: black !important;
+  }
+  .bg-decor, .app-header, .main-nav, .unit-selector-bar, .achievements-grid, .btn-print-cert, .floating-mascot-helper, #confetti-canvas {
+    display: none !important;
+  }
+  .app-container {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .tab-content {
+    display: block !important;
+  }
+  #tab-achievements {
+    display: block !important;
+  }
+  .certificate-preview-wrapper {
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    page-break-inside: avoid;
+  }
+  .certificate-border-outer {
+    border: 8px double #000 !important;
+    background: #fff !important;
+  }
+}
+
+</style>
+</head>
+<body>
+
+  <!-- Floating Background Blobs -->
+  <div class="bg-decor">
+    <div class="decor-bubble decor-bubble-1"></div>
+    <div class="decor-bubble decor-bubble-2"></div>
+    <div class="decor-bubble decor-bubble-3"></div>
+  </div>
+
+  <div class="app-container">
+
+    <!-- Top Navigation & User Header -->
+    <header class="app-header">
+      <div class="brand-wrapper" onclick="app.switchTab('units')">
+        <div class="brand-mascot-avatar" id="header-mascot">🐻</div>
+        <div class="brand-text">
+          <h1>
+            English Adventure 
+            <span class="brand-badge">ป.4</span>
+          </h1>
+          <p>สื่อการเรียนรู้ภาษาอังกฤษแสนสนุก ชั้นประถมศึกษาปีที่ 4</p>
+        </div>
+      </div>
+
+      <div class="header-controls">
+        <!-- Student Profile Pill -->
+        <div class="stat-pill user-profile" onclick="app.openProfileModal()" title="คลิกเพื่อแก้ไขชื่อนักเรียน">
+          <span id="user-avatar-display">🐻</span>
+          <span id="user-name-display">น้องคนเก่ง</span>
+        </div>
+
+        <!-- Stars Counter -->
+        <div class="stat-pill stars" title="ดาวสะสม">
+          <span>⭐</span>
+          <span id="user-stars-display">0</span>
+        </div>
+
+        <!-- Sound Toggle -->
+        <button class="btn-icon" id="btn-toggle-sound" onclick="app.toggleSound()" title="เปิด/ปิดเสียงเอฟเฟกต์">
+          🔊
+        </button>
+
+        <!-- Reset Data / Help -->
+        <button class="btn-icon" onclick="app.showMascotTip()" title="คำแนะนำจากพี่หมีเบนนี่">
+          💡
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Navigation Bar -->
+    <nav class="main-nav">
+      <button class="nav-tab-btn active" data-tab="units" onclick="app.switchTab('units')">
+        <span class="tab-icon">🏠</span>
+        <span>บทเรียน (Units)</span>
+      </button>
+      <button class="nav-tab-btn" data-tab="flashcards" onclick="app.switchTab('flashcards')">
+        <span class="tab-icon">📖</span>
+        <span>บัตรคำศัพท์ & ออกเสียง</span>
+      </button>
+      <button class="nav-tab-btn" data-tab="dialogue" onclick="app.switchTab('dialogue')">
+        <span class="tab-icon">💬</span>
+        <span>บทสนทนา (Dialogue)</span>
+      </button>
+      <button class="nav-tab-btn" data-tab="games" onclick="app.switchTab('games')">
+        <span class="tab-icon">🎮</span>
+        <span>มินิเกมแสนสนุก (Games)</span>
+      </button>
+      <button class="nav-tab-btn" data-tab="quiz" onclick="app.switchTab('quiz')">
+        <span class="tab-icon">📝</span>
+        <span>แบบทดสอบ (Quiz)</span>
+      </button>
+      <button class="nav-tab-btn" data-tab="achievements" onclick="app.switchTab('achievements')">
+        <span class="tab-icon">🏆</span>
+        <span>เกียรติบัตร & รางวัล</span>
+      </button>
+    </nav>
+
+    <!-- Unit Selector Bar (shown on specific tabs) -->
+    <section class="unit-selector-bar" id="unit-selector-bar">
+      <div class="unit-info-left">
+        <div class="unit-info-badge" id="current-unit-icon">⏰</div>
+        <div class="unit-title-text">
+          <h2 id="current-unit-title">Unit 1: All About Me & Daily Routines</h2>
+          <p id="current-unit-subtitle">กิจวัตรประจำวันและตัวเรา</p>
+        </div>
+      </div>
+      <div>
+        <select class="unit-picker-select" id="unit-dropdown" onchange="app.changeUnit(this.value)">
+          <option value="1">Unit 1: กิจวัตรประจำวัน & เวลา (Daily Routines)</option>
+          <option value="2">Unit 2: โรงเรียน & วิชาโปรด (My School)</option>
+          <option value="3">Unit 3: ครอบครัว & อาชีพในฝัน (Dream Jobs)</option>
+          <option value="4">Unit 4: อาหาร & สั่งอาหาร (Food & Drinks)</option>
+          <option value="5">Unit 5: สัตว์โลกน่ารัก (Animals & Comparatives)</option>
+          <option value="6">Unit 6: สถานที่ & การบอกทาง (Places in Town)</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 1: UNITS OVERVIEW ==================== -->
+    <main id="tab-units" class="tab-content active">
+      <!-- Mascot Welcome Banner -->
+      <section class="mascot-banner">
+        <div class="mascot-big-avatar">🐻</div>
+        <div class="mascot-banner-text">
+          <h2>ยินดีต้อนรับสู่ห้องเรียนภาษาอังกฤษ ป.4! ✨</h2>
+          <p>
+            สวัสดีครับ! พี่หมีเบนนี่จะพาน้องๆ ไปผจญภัยเรียนรู้ภาษาอังกฤษทั้ง 6 บทเรียน 
+            ฟังสำเนียงเจ้าของภาษา ฝึกสะกดคำ เล่นเกม และสะสมดาวรับเกียรติบัตรสุดเท่กันเลย!
+          </p>
+        </div>
+      </section>
+
+      <!-- Units Grid List -->
+      <section class="units-grid" id="units-list-container">
+        <!-- Rendered by JS -->
+      </section>
+    </main>
+
+    <!-- ==================== TAB 2: FLASHCARDS ==================== -->
+    <section id="tab-flashcards" class="tab-content">
+      <div class="flashcards-toolbar">
+        <div class="search-input-box">
+          <span>🔍</span>
+          <input type="text" id="card-search-input" placeholder="ค้นหาคำศัพท์ หรือความหมายภาษาไทย..." oninput="app.filterWords(this.value)">
+        </div>
+        <button class="grammar-toggle-btn" onclick="app.toggleGrammarBox()">
+          <span>💡</span>
+          <span>ไวยากรณ์น่ารู้ประจำหน่วย</span>
+        </button>
+      </div>
+
+      <!-- Grammar Tip Box -->
+      <div class="grammar-box" id="grammar-tip-box">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- Cards Grid -->
+      <div class="cards-grid" id="flashcards-container">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+
+    <!-- ==================== TAB 3: DIALOGUE LAB ==================== -->
+    <section id="tab-dialogue" class="tab-content">
+      <div class="dialogue-container">
+        <div class="dialogue-header">
+          <h3 id="dialogue-title-en">Conversation: Morning Routine</h3>
+          <p id="dialogue-title-th">บทสนทนา: กิจวัตรยามเช้า</p>
+        </div>
+
+        <div class="dialogue-speakers-bar" id="dialogue-speakers-list">
+          <!-- Rendered by JS -->
+        </div>
+
+        <div class="dialogue-chat-flow" id="dialogue-chat-list">
+          <!-- Rendered by JS -->
+        </div>
+
+        <button class="btn-play-all-dialogue" onclick="app.playFullDialogue()">
+          <span>▶️</span>
+          <span>ฟังบทสนทนาอัตโนมัติทั้งหมด</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 4: MINI GAMES ==================== -->
+    <section id="tab-games" class="tab-content">
+      <!-- Games Selection Hub -->
+      <div class="games-hub-menu">
+        <div class="game-select-card active" data-game="spelling" onclick="app.switchMiniGame('spelling')">
+          <div class="game-select-icon">🔤</div>
+          <h4>1. สะกดคำศัพท์ (Word Spelling)</h4>
+          <p>แตะตัวอักษรเรียงสะกดคำศัพท์ให้ถูกต้อง</p>
+        </div>
+        <div class="game-select-card" data-game="memory" onclick="app.switchMiniGame('memory')">
+          <div class="game-select-icon">🃏</div>
+          <h4>2. จับคู่ความจำ (Speed Match)</h4>
+          <p>เปิดไพ่จับคู่คำศัพท์ภาษาอังกฤษกับความหมาย</p>
+        </div>
+        <div class="game-select-card" data-game="listening" onclick="app.switchMiniGame('listening')">
+          <div class="game-select-icon">🎧</div>
+          <h4>3. ฟังเสียงทายคำ (Listen & Guess)</h4>
+          <p>ฟังการออกเสียงแล้วเลือกภาพที่ถูกต้อง</p>
+        </div>
+      </div>
+
+      <!-- Play Screen -->
+      <div class="game-play-area">
+        <!-- Mini-Game 1: Spelling -->
+        <div id="game-spelling-panel" class="game-subview">
+          <div class="spelling-board">
+            <div class="spelling-emoji-display" id="spelling-emoji">🌅</div>
+            <div class="spelling-thai-hint" id="spelling-thai">ตื่นนอน</div>
+            <div class="spelling-sound-hint">
+              <button class="btn-icon" style="margin: 0 auto; width: 48px; height: 48px;" onclick="app.speakCurrentSpellingWord()" title="ฟังเสียงคำศัพท์">
+                🔊
+              </button>
+            </div>
+
+            <!-- Answer Slots -->
+            <div class="spelling-answer-boxes" id="spelling-answer-boxes">
+              <!-- Rendered by JS -->
+            </div>
+
+            <!-- Letters Pool -->
+            <div class="spelling-tiles-pool" id="spelling-tiles-pool">
+              <!-- Rendered by JS -->
+            </div>
+
+            <div class="spelling-controls-row">
+              <button class="btn-game-action btn-game-delete" onclick="app.deleteSpellingLetter()">⌫ ลบทีละตัว</button>
+              <button class="btn-game-action btn-game-hint" onclick="app.hintSpelling()">💡 ขอตัวช่วยใบ้คำ</button>
+              <button class="btn-game-action btn-start-unit" onclick="app.nextSpellingWord()">ข้ามไปข้อถัดไป ➔</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mini-Game 2: Memory Match -->
+        <div id="game-memory-panel" class="game-subview" style="display: none;">
+          <div style="text-align: center; margin-bottom: 16px;">
+            <p style="font-family: var(--font-thai); font-weight: 700; color: #475569;">
+              จับคู่การ์ดภาษาอังกฤษกับความหมายภาษาไทยให้ครบทุกคู่!
+            </p>
+          </div>
+          <div class="memory-grid" id="memory-cards-grid">
+            <!-- Rendered by JS -->
+          </div>
+          <div style="text-align: center; margin-top: 20px;">
+            <button class="btn-start-unit" onclick="app.initMemoryGame()">🔄 เริ่มเกมใหม่</button>
+          </div>
+        </div>
+
+        <!-- Mini-Game 3: Listening Quiz -->
+        <div id="game-listening-panel" class="game-subview" style="display: none;">
+          <div class="listen-game-box">
+            <p style="font-family: var(--font-thai); font-weight: 700; font-size: 1.1rem; color: #1e3a8a;">
+              คลิกปุ่มด้านล่างเพื่อฟังเสียงคำศัพท์ แล้วเลือกคำตอบที่ถูกต้อง!
+            </p>
+            <button class="listen-play-big-btn" onclick="app.playListeningAudio()" title="กดเพื่อฟังเสียง">
+              🔊
+            </button>
+            <p id="listen-game-prompt" style="font-family: var(--font-thai); color: #64748b;">(กดฟังเสียงกี่รอบก็ได้นะ)</p>
+
+            <div class="listen-options-grid" id="listen-options-grid">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 5: UNIT QUIZ ==================== -->
+    <section id="tab-quiz" class="tab-content">
+      <div class="quiz-container" id="quiz-container">
+        <!-- Active Quiz Question View -->
+        <div id="quiz-active-view">
+          <div class="quiz-progress-bar-container">
+            <div class="quiz-progress-bar-fill" id="quiz-progress-bar"></div>
+          </div>
+
+          <div class="quiz-question-header">
+            <div class="quiz-question-num" id="quiz-q-num">ข้อที่ 1 / 5</div>
+            <div class="quiz-question-title" id="quiz-q-title">What time do you usually eat in the morning?</div>
+            <div class="quiz-question-thai" id="quiz-q-thai">ข้อใดคือมื้ออาหารที่เราทานในตอนเช้า?</div>
+          </div>
+
+          <div class="quiz-options-list" id="quiz-options-container">
+            <!-- Rendered by JS -->
+          </div>
+
+          <div class="quiz-feedback-box" id="quiz-feedback-box">
+            <!-- Feedback explanation -->
+          </div>
+
+          <button class="btn-next-question" id="btn-quiz-next" style="display: none;" onclick="app.nextQuizQuestion()">
+            ข้อถัดไป ➔
+          </button>
+        </div>
+
+        <!-- Finished Quiz View -->
+        <div id="quiz-result-view" style="display: none;">
+          <div class="quiz-result-card">
+            <div class="quiz-result-icon" id="quiz-result-emoji">🎉</div>
+            <div class="quiz-result-score" id="quiz-result-score">5 / 5</div>
+            <div class="quiz-result-stars" id="quiz-result-stars">⭐⭐⭐⭐⭐</div>
+            <div class="quiz-result-msg" id="quiz-result-msg">ยอดเยี่ยมมาก! น้องผ่านบทเรียนนี้อย่างสมบูรณ์แบบ!</div>
+            <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+              <button class="btn-start-unit" onclick="app.restartQuiz()">🔄 ทำแบบทดสอบอีกครั้ง</button>
+              <button class="btn-start-unit" style="background: #10b981;" onclick="app.switchTab('achievements')">🏆 ไปดูเกียรติบัตร</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 6: ACHIEVEMENTS & CERTIFICATE ==================== -->
+    <section id="tab-achievements" class="tab-content">
+      <!-- Achievements Badges Grid -->
+      <h3 style="font-family: var(--font-thai); font-size: 1.3rem; color: #1e3a8a; margin-bottom: 14px;">
+        🎖️ เหรียญรางวัลความสำเร็จ (Badges)
+      </h3>
+      <div class="achievements-grid" id="achievements-badges-container">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- Printable Certificate -->
+      <div class="certificate-preview-wrapper">
+        <div class="certificate-border-outer">
+          <span class="cert-corner-decor cert-corner-tl">⚜️</span>
+          <span class="cert-corner-decor cert-corner-tr">⚜️</span>
+          <span class="cert-corner-decor cert-corner-bl">⚜️</span>
+          <span class="cert-corner-decor cert-corner-br">⚜️</span>
+
+          <div class="cert-emblem">🎓</div>
+
+          <div class="cert-header">
+            <h2>Certificate of Achievement</h2>
+            <p>เกียรติบัตรแห่งความสำเร็จ หลักสูตรภาษาอังกฤษ ชั้นประถมศึกษาปีที่ 4</p>
+          </div>
+
+          <p style="font-family: var(--font-thai); font-size: 1.1rem; color: #78350f;">มอบให้แด่</p>
+          <div class="cert-student-name" id="cert-student-name-text">เด็กชาย/เด็กหญิง คนเก่ง ป.4</div>
+
+          <p class="cert-reason">
+            ได้ผ่านการเรียนรู้ ฝึกฝนทักษะการฟัง พูด อ่าน เขียน 
+            และทำแบบทดสอบวิชาภาษาอังกฤษ ชั้นประถมศึกษาปีที่ 4 (English Adventure) 
+            ได้อย่างยอดเยี่ยม ขอจงมีความมุ่งมั่นและประสบความสำเร็จในการเรียนรู้สืบไป
+          </p>
+
+          <div class="cert-footer-row">
+            <div>
+              <div class="cert-date" id="cert-date-text">วันที่ 19 พฤศจิกายน 2569</div>
+              <div style="font-size: 0.8rem; color: #92400e; font-family: var(--font-thai);">วันที่สำเร็จหลักสูตร</div>
+            </div>
+            <div>
+              <div class="cert-signature-line" id="cert-school-text">โรงเรียนประถมศึกษา</div>
+              <div style="font-size: 0.8rem; color: #92400e; font-family: var(--font-thai);">ครูผู้สอน / สถานศึกษา</div>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn-print-cert" onclick="window.print()">
+          <span>🖨️</span>
+          <span>พิมพ์เกียรติบัตร หรือ บันทึกเป็น PDF</span>
+        </button>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Floating Mascot Helper -->
+  <aside class="floating-mascot-helper">
+    <div class="mascot-speech-bubble" id="mascot-floating-text" onclick="app.showNextMascotTip()">
+      กดที่การ์ดคำศัพท์เพื่อฟังเสียงภาษาอังกฤษได้เลยนะ! 🐻
+    </div>
+    <div class="mascot-bubble-avatar" onclick="app.showNextMascotTip()" title="แตะเพื่อคุยกับพี่หมีเบนนี่">
+      🐻
+    </div>
+  </aside>
+
+  <!-- Edit Profile Modal -->
+  <div class="modal-overlay" id="profile-modal">
+    <div class="modal-content">
+      <h3>✏️ ข้อมูลนักเรียน</h3>
+
+      <div class="avatar-selector">
+        <span class="avatar-opt selected" onclick="app.selectAvatar('🐻')">🐻</span>
+        <span class="avatar-opt" onclick="app.selectAvatar('🐱')">🐱</span>
+        <span class="avatar-opt" onclick="app.selectAvatar('🦁')">🦁</span>
+        <span class="avatar-opt" onclick="app.selectAvatar('🐼')">🐼</span>
+        <span class="avatar-opt" onclick="app.selectAvatar('🐰')">🐰</span>
+        <span class="avatar-opt" onclick="app.selectAvatar('🦊')">🦊</span>
+      </div>
+
+      <div class="form-group">
+        <label for="input-student-name">ชื่อ-นามสกุล / ชื่อเล่น:</label>
+        <input type="text" id="input-student-name" class="form-input" placeholder="เช่น ด.ช.พอใจ รักเรียน">
+      </div>
+
+      <div class="form-group">
+        <label for="input-student-class">ระดับชั้น / ห้อง:</label>
+        <input type="text" id="input-student-class" class="form-input" placeholder="เช่น ชั้น ป.4/1">
+      </div>
+
+      <div class="form-group">
+        <label for="input-school-name">ชื่อโรงเรียน:</label>
+        <input type="text" id="input-school-name" class="form-input" placeholder="เช่น โรงเรียนอนุบาลเทศบาล">
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn-game-action btn-game-delete" onclick="app.closeProfileModal()">ยกเลิก</button>
+        <button class="btn-game-action btn-start-unit" onclick="app.saveProfile()">บันทึกข้อมูล</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+<script>
+// ข้อมูลเนื้อหาบทเรียนภาษาอังกฤษ ป.4 ตามหลักสูตรแกนกลางการศึกษาขั้นพื้นฐาน
+const CURRICULUM_DATA = {
+  units: [
+    {
+      id: 1,
+      title: "Unit 1: All About Me & Daily Routines",
+      titleTh: "กิจวัตรประจำวันและตัวเรา",
+      description: "เรียนรู้คำศัพท์การทำกิจกรรมประจำวัน และการบอกเวลา",
+      icon: "⏰",
+      color: "from-amber-400 to-orange-500",
+      themeColor: "#f59e0b",
+      grammarTip: {
+        title: "Grammar Tips: Present Simple Tense & Telling Time",
+        titleTh: "ไวยากรณ์น่ารู้: กิจวัตรประจำวันและการบอกเวลา",
+        rules: [
+          {
+            point: "I / You / We / They + กริยาช่อง 1 (ไม่เติม s)",
+            example: "I get up at 6:00 o'clock. (ฉันตื่นนอนเวลา 6 โมงเช้า)"
+          },
+          {
+            point: "He / She / It + กริยาช่อง 1 (เติม s หรือ es)",
+            example: "She brushes her teeth every morning. (เธอแปรงฟันทุกเช้า)"
+          },
+          {
+            point: "การถามและตอบเรื่องเวลา: What time is it? / What time do you...?",
+            example: "What time do you go to school? ➡️ I go to school at 7:30."
+          }
+        ]
+      },
+      words: [
+        {
+          id: "u1_1",
+          word: "get up",
+          thai: "ตื่นนอน",
+          phonetic: "/เก็ท อัพ/",
+          type: "v.",
+          emoji: "🌅",
+          exampleEn: "I get up at six o'clock every morning.",
+          exampleTh: "ฉันตื่นนอนตอนหกโมงเช้าทุกวัน"
+        },
+        {
+          id: "u1_2",
+          word: "brush teeth",
+          thai: "แปรงฟัน",
+          phonetic: "/บรัช ทีธ/",
+          type: "v.",
+          emoji: "🪥",
+          exampleEn: "Remember to brush your teeth twice a day.",
+          exampleTh: "อย่าลืมแปรงฟันวันละสองครั้งนะ"
+        },
+        {
+          id: "u1_3",
+          word: "wash face",
+          thai: "ล้างหน้า",
+          phonetic: "/วอช เฟส/",
+          type: "v.",
+          emoji: "🧼",
+          exampleEn: "I wash my face with cool water.",
+          exampleTh: "ฉันล้างหน้าด้วยน้ำเย็น"
+        },
+        {
+          id: "u1_4",
+          word: "take a shower",
+          thai: "อาบน้ำ",
+          phonetic: "/เทค อะ เชา-เว่อร์/",
+          type: "v.",
+          emoji: "🚿",
+          exampleEn: "He takes a shower before getting dressed.",
+          exampleTh: "เขาอาบน้ำก่อนที่จะแต่งตัว"
+        },
+        {
+          id: "u1_5",
+          word: "get dressed",
+          thai: "แต่งตัว",
+          phonetic: "/เก็ท เดรสทฺ/",
+          type: "v.",
+          emoji: "👕",
+          exampleEn: "I get dressed in my school uniform.",
+          exampleTh: "ฉันแต่งตัวด้วยชุดนักเรียน"
+        },
+        {
+          id: "u1_6",
+          word: "eat breakfast",
+          thai: "รับประทานอาหารเช้า",
+          phonetic: "/อีท เบรค-ฟัสท์/",
+          type: "v.",
+          emoji: "🍳",
+          exampleEn: "We eat breakfast at seven o'clock.",
+          exampleTh: "พวกเราทานอาหารเช้าตอน 7 โมงเช้า"
+        },
+        {
+          id: "u1_7",
+          word: "go to school",
+          thai: "ไปโรงเรียน",
+          phonetic: "/โก ทู สกูล/",
+          type: "v.",
+          emoji: "🏫",
+          exampleEn: "I go to school by bus.",
+          exampleTh: "ฉันไปโรงเรียนโดยรถบัส"
+        },
+        {
+          id: "u1_8",
+          word: "have lunch",
+          thai: "รับประทานอาหารกลางวัน",
+          phonetic: "/แฮฟว์ ลันช์/",
+          type: "v.",
+          emoji: "🍱",
+          exampleEn: "Students have lunch at twelve o'clock.",
+          exampleTh: "นักเรียนทานอาหารกลางวันเวลา 12 นาฬิกา"
+        },
+        {
+          id: "u1_9",
+          word: "do homework",
+          thai: "ทำการบ้าน",
+          phonetic: "/ดู โฮม-เวิร์ค/",
+          type: "v.",
+          emoji: "✍️",
+          exampleEn: "I do my English homework in the evening.",
+          exampleTh: "ฉันทำการบ้านภาษาอังกฤษในตอนเย็น"
+        },
+        {
+          id: "u1_10",
+          word: "go to bed",
+          thai: "เข้านอน",
+          phonetic: "/โก ทู เบด/",
+          type: "v.",
+          emoji: "🛏️",
+          exampleEn: "I go to bed at nine o'clock at night.",
+          exampleTh: "ฉันเข้านอนเวลาสามทุ่ม (21:00)"
+        },
+        {
+          id: "u1_11",
+          word: "o'clock",
+          thai: "...นาฬิกา (ตรง)",
+          phonetic: "/โอ-คล็อค/",
+          type: "adv.",
+          emoji: "🕛",
+          exampleEn: "It is eight o'clock in the morning.",
+          exampleTh: "ตอนนี้เป็นเวลาแปดนาฬิกาตรง"
+        },
+        {
+          id: "u1_12",
+          word: "half past",
+          thai: "...โมงครึ่ง (30 นาที)",
+          phonetic: "/ฮาล์ฟ พาสท์/",
+          type: "prep.",
+          emoji: "🕧",
+          exampleEn: "School starts at half past eight (8:30).",
+          exampleTh: "โรงเรียนเริ่มเรียนเวลาแปดโมงครึ่ง"
+        }
+      ],
+      dialogue: {
+        title: "Conversation: Morning Routine",
+        titleTh: "บทสนทนา: กิจวัตรยามเช้า",
+        speakers: [
+          { name: "Benny", avatar: "🐻", role: "หมีเบนนี่" },
+          { name: "Mia", avatar: "🐱", role: "แมวมีอา" }
+        ],
+        lines: [
+          { speaker: "Benny", text: "Good morning, Mia! What time do you get up?", textTh: "อรุณสวัสดิ์มีอา! เธอตื่นนอนกี่โมงเหรอ?" },
+          { speaker: "Mia", text: "Good morning! I get up at six o'clock every day.", textTh: "อรุณสวัสดิ์! ฉันตื่นนอนตอนหกโมงเช้าทุกวันเลย" },
+          { speaker: "Benny", text: "Wow, that's early! What do you do after that?", textTh: "ว้าว เช้าจังเลย! แล้วหลังจากนั้นเธอทำอะไรต่อล่ะ?" },
+          { speaker: "Mia", text: "I brush my teeth, take a shower, and eat breakfast at half past seven.", textTh: "ฉันแปรงฟัน อาบน้ำ และทานอาหารเช้าตอนเจ็ดโมงครึ่งจ้า" },
+          { speaker: "Benny", text: "Great! Let's go to school together!", textTh: "ยอดเยี่ยมเลย! ไปโรงเรียนด้วยกันเถอะ!" }
+        ]
+      },
+      quiz: [
+        {
+          question: "What time do you usually eat in the morning?",
+          questionTh: "ข้อใดคือมื้ออาหารที่เราทานในตอนเช้า?",
+          options: ["eat lunch", "eat breakfast", "eat dinner", "go to bed"],
+          answer: 1,
+          explanation: "eat breakfast แปลว่า รับประทานอาหารเช้า ส่วน eat lunch คือมื้อเที่ยง และ eat dinner คือมื้อเย็น"
+        },
+        {
+          question: "Complete the sentence: 'She ________ her teeth every day.'",
+          questionTh: "เติมคำในช่องว่างให้ถูกต้องตามหลักไวยากรณ์ (She)",
+          options: ["brush", "brushes", "brushing", "brushed"],
+          answer: 1,
+          explanation: "ประธาน He / She / It กริยาต้องเติม s หรือ es ดังนั้น brush ลงท้ายด้วย sh จึงเติม es เป็น brushes"
+        },
+        {
+          question: "What does 'half past eight' mean?",
+          questionTh: "'half past eight' หมายถึงเวลาใด?",
+          options: ["8:00", "8:15", "8:30", "8:45"],
+          answer: 2,
+          explanation: "half แปลว่า ครึ่ง (30 นาที) half past eight จึงหมายถึง เวลาแปดโมงครึ่ง (8:30)"
+        },
+        {
+          question: "Which picture matches: 'I do my homework'?",
+          questionTh: "กิจกรรม 'I do my homework' หมายถึงอะไร?",
+          options: ["ไปโรงเรียน", "ทำการบ้าน", "ล้างหน้า", "เข้านอน"],
+          answer: 1,
+          explanation: "do homework หมายถึง ทำการบ้าน"
+        },
+        {
+          question: "A: What time is it? B: It is seven _________ (7:00).",
+          questionTh: "เติมคำบอกเวลา 'ตรง' ให้ถูกต้อง",
+          options: ["half past", "o'clock", "morning", "night"],
+          answer: 1,
+          explanation: "เวลาตรงพอดีไม่มีเศษนาที เราใช้คำว่า o'clock เช่น seven o'clock (7:00)"
+        }
+      ]
+    },
+
+    {
+      id: 2,
+      title: "Unit 2: My School & Favorite Subjects",
+      titleTh: "โรงเรียนและวิชาสุดโปรด",
+      description: "วิชาเรียนต่างๆ สิ่งของในห้องเรียน และการบอกความชอบ",
+      icon: "📚",
+      color: "from-blue-400 to-indigo-600",
+      themeColor: "#3b82f6",
+      grammarTip: {
+        title: "Grammar Tips: Asking About Likes & Reasons",
+        titleTh: "ไวยากรณ์น่ารู้: การถามวิชาที่ชอบและเหตุผล",
+        rules: [
+          {
+            point: "What is your favorite subject? (วิชาโปรดของคุณคือวิชาอะไร?)",
+            example: "My favorite subject is English. (วิชาโปรดของฉันคือภาษาอังกฤษ)"
+          },
+          {
+            point: "Why do you like it? (ทำไมเธอถึงชอบวิชานี้?)",
+            example: "Because it is fun and easy! (เพราะว่ามันสนุกและง่ายมาก!)"
+          },
+          {
+            point: "คำคุณศัพท์บอกเหตุผล: fun (สนุก), easy (ง่าย), interesting (น่าสนใจ), difficult (ยาก)",
+            example: "I like Science because it is interesting."
+          }
+        ]
+      },
+      words: [
+        {
+          id: "u2_1",
+          word: "English",
+          thai: "ภาษาอังกฤษ",
+          phonetic: "/อิง-กลิช/",
+          type: "n.",
+          emoji: "🇬🇧",
+          exampleEn: "We learn new words in English class.",
+          exampleTh: "เราเรียนรู้คำศัพท์ใหม่ในห้องเรียนภาษาอังกฤษ"
+        },
+        {
+          id: "u2_2",
+          word: "Mathematics",
+          thai: "คณิตศาสตร์ (เลข)",
+          phonetic: "/แมธ-เธอะ-แมท-ทิคส์/",
+          type: "n.",
+          emoji: "➗",
+          exampleEn: "Math is about numbers and shapes.",
+          exampleTh: "วิชาคณิตศาสตร์เกี่ยวกับตัวเลขและรูปทรง"
+        },
+        {
+          id: "u2_3",
+          word: "Science",
+          thai: "วิทยาศาสตร์",
+          phonetic: "/ไซ-เอินส์/",
+          type: "n.",
+          emoji: "🔬",
+          exampleEn: "We do fun experiments in Science.",
+          exampleTh: "พวกเราทำการทดลองสนุกๆ ในวิชาวิทยาศาสตร์"
+        },
+        {
+          id: "u2_4",
+          word: "Thai",
+          thai: "ภาษาไทย",
+          phonetic: "/ไท/",
+          type: "n.",
+          emoji: "🇹🇭",
+          exampleEn: "We read Thai poems and stories.",
+          exampleTh: "พวกเราอ่านบทกลอนและนิทานในวิชาภาษาไทย"
+        },
+        {
+          id: "u2_5",
+          word: "Social Studies",
+          thai: "สังคมศึกษา",
+          phonetic: "/โซ-เชียล สตั๊ด-ดีส/",
+          type: "n.",
+          emoji: "🌍",
+          exampleEn: "Social Studies teaches us about the world.",
+          exampleTh: "วิชาสังคมศึกษาสอนเรื่องราวเกี่ยวกับโลก"
+        },
+        {
+          id: "u2_6",
+          word: "Art",
+          thai: "ศิลปะ",
+          phonetic: "/อาร์ท/",
+          type: "n.",
+          emoji: "🎨",
+          exampleEn: "I love painting pictures in Art class.",
+          exampleTh: "ฉันชอบวาดภาพระบายสีในวิชาศิลปะ"
+        },
+        {
+          id: "u2_7",
+          word: "Music",
+          thai: "ดนตรี",
+          phonetic: "/มิว-สิค/",
+          type: "n.",
+          emoji: "🎵",
+          exampleEn: "We play the recorder in Music class.",
+          exampleTh: "พวกเราเป่าขลุ่ยรีคอร์เดอร์ในวิชาดนตรี"
+        },
+        {
+          id: "u2_8",
+          word: "Physical Education (P.E.)",
+          thai: "สุขศึกษาและพลศึกษา",
+          phonetic: "/ฟิสิเคิล เอ็ดดูเคชั่น/",
+          type: "n.",
+          emoji: "⚽",
+          exampleEn: "We play football in P.E. class.",
+          exampleTh: "พวกเราเล่นฟุตบอลในวิชาพละ"
+        },
+        {
+          id: "u2_9",
+          word: "library",
+          thai: "ห้องสมุด",
+          phonetic: "/ไล-บรารี/",
+          type: "n.",
+          emoji: "📖",
+          exampleEn: "You must be quiet in the library.",
+          exampleTh: "เธอต้องเงียบสงบเมื่ออยู่ในห้องสมุด"
+        },
+        {
+          id: "u2_10",
+          word: "playground",
+          thai: "สนามเด็กเล่น",
+          phonetic: "/เพลย์-กราวด์/",
+          type: "n.",
+          emoji: "🛝",
+          exampleEn: "Children run happily in the playground.",
+          exampleTh: "เด็กๆ วิ่งเล่นอย่างมีความสุขในสนามเด็กเล่น"
+        },
+        {
+          id: "u2_11",
+          word: "favorite",
+          thai: "ที่ชื่นชอบ / โปรดปราน",
+          phonetic: "/เฟ-เวอะ-ริท/",
+          type: "adj.",
+          emoji: "⭐",
+          exampleEn: "Blue is my favorite color.",
+          exampleTh: "สีฟ้าคือสีโปรดของฉัน"
+        },
+        {
+          id: "u2_12",
+          word: "difficult",
+          thai: "ยาก",
+          phonetic: "/ดิฟ-ฟิ-คัลท์/",
+          type: "adj.",
+          emoji: "🧩",
+          exampleEn: "This math puzzle is quite difficult.",
+          exampleTh: "ปริศนาคณิตศาสตร์ข้อนี้ค่อนข้างยาก"
+        }
+      ],
+      dialogue: {
+        title: "Conversation: Favorite Subject",
+        titleTh: "บทสนทนา: วิชาที่ชื่นชอบ",
+        speakers: [
+          { name: "Benny", avatar: "🐻", role: "หมีเบนนี่" },
+          { name: "Mia", avatar: "🐱", role: "แมวมีอา" }
+        ],
+        lines: [
+          { speaker: "Benny", text: "Hi Mia! What is your favorite subject?", textTh: "สวัสดีมีอา! เธอชอบวิชาอะไรมากที่สุดเหรอ?" },
+          { speaker: "Mia", text: "My favorite subject is Art! I love drawing colorful animals.", textTh: "วิชาโปรดของฉันคือวิชาศิลปะ! ฉันชอบวาดรูปสัตว์หลากสีสันมากเลย" },
+          { speaker: "Benny", text: "Nice! I like Science because we can do fun experiments.", textTh: "เยี่ยมเลย! ส่วนฉันชอบวิทยาศาสตร์เพราะเราได้ทำการทดลองสนุกๆ" },
+          { speaker: "Mia", text: "Do you like Math?", textTh: "แล้วเธอชอบวิชาคณิตศาสตร์ไหม?" },
+          { speaker: "Benny", text: "It is a bit difficult, but our teacher makes it fun!", textTh: "มันค่อนข้างยากนิดหน่อย แต่คุณครูสอนสนุกมากเลยนะ!" }
+        ]
+      },
+      quiz: [
+        {
+          question: "In which subject do you draw and paint pictures?",
+          questionTh: "วิชาใดที่เราได้วาดภาพและระบายสี?",
+          options: ["Science", "Art", "Mathematics", "Music"],
+          answer: 1,
+          explanation: "Art คือวิชาศิลปะ ได้วาดภาพ (draw) และระบายสี (paint)"
+        },
+        {
+          question: "A: What is your ________ subject? B: I like English.",
+          questionTh: "คำใดหมายถึง 'ที่ชื่นชอบ / โปรดปราน'?",
+          options: ["boring", "favorite", "difficult", "angry"],
+          answer: 1,
+          explanation: "favorite แปลว่า ชื่นชอบหรือโปรดปราน มักใช้คู่กับ subject เช่น favorite subject"
+        },
+        {
+          question: "Where can you borrow and read books at school?",
+          questionTh: "สถานที่ใดในโรงเรียนที่คุณสามารถยืมและอ่านหนังสือได้?",
+          options: ["playground", "canteen", "library", "gym"],
+          answer: 2,
+          explanation: "library แปลว่า ห้องสมุด"
+        },
+        {
+          question: "Which subject is about numbers, addition, and shapes?",
+          questionTh: "วิชาใดที่เกี่ยวกับตัวเลข การบวกเลข และรูปทรง?",
+          options: ["Mathematics", "Physical Education", "Social Studies", "Thai"],
+          answer: 0,
+          explanation: "Mathematics (Math) คือวิชาคณิตศาสตร์"
+        },
+        {
+          question: "A: Why do you like Science? B: ________ it is interesting.",
+          questionTh: "เมื่อถามด้วย 'Why' (ทำไม) เรามักตอบด้วยคำว่าอะไร?",
+          options: ["So", "Because", "When", "Where"],
+          answer: 1,
+          explanation: "เมื่อถามคำถามขึ้นต้นด้วย Why (ทำไม) คำตอบจะเริ่มต้นด้วย Because (เพราะว่า)"
+        }
+      ]
+    },
+
+    {
+      id: 3,
+      title: "Unit 3: Family & Dream Jobs",
+      titleTh: "ครอบครัวและอาชีพในฝัน",
+      description: "คำศัพท์อาชีพ สถานที่ทำงาน และการบอกความฝันในอนาคต",
+      icon: "👩‍⚕️",
+      color: "from-emerald-400 to-teal-600",
+      themeColor: "#10b981",
+      grammarTip: {
+        title: "Grammar Tips: Talking About Occupations",
+        titleTh: "ไวยากรณ์น่ารู้: การถาม-ตอบเกี่ยวกับอาชีพ",
+        rules: [
+          {
+            point: "What do you want to be? (โตขึ้นเธออยากเป็นอะไร?)",
+            example: "I want to be a doctor. / I want to be an artist."
+          },
+          {
+            point: "การใช้ a / an หน้านามอาชีพ",
+            example: "a teacher, a pilot (ขึ้นต้นด้วยเสียงพยัญชนะ) | an engineer, an artist (ขึ้นต้นด้วยเสียงสระ a, e, i, o, u)"
+          },
+          {
+            point: "Where does he / she work? (เขาทำงานที่ไหน?)",
+            example: "A doctor works in a hospital. / A teacher works in a school."
+          }
+        ]
+      },
+      words: [
+        {
+          id: "u3_1",
+          word: "doctor",
+          thai: "แพทย์ / คุณหมอ",
+          phonetic: "/ด็อก-เทอะ/",
+          type: "n.",
+          emoji: "👨‍⚕️",
+          exampleEn: "A doctor helps sick people in the hospital.",
+          exampleTh: "คุณหมอช่วยรักษาผู้ป่วยในโรงพยาบาล"
+        },
+        {
+          id: "u3_2",
+          word: "nurse",
+          thai: "พยาบาล",
+          phonetic: "/เนิร์ส/",
+          type: "n.",
+          emoji: "👩‍⚕️",
+          exampleEn: "The nurse takes care of patients kindly.",
+          exampleTh: "พยาบาลดูแลคนไข้อย่างอ่อนโยน"
+        },
+        {
+          id: "u3_3",
+          word: "teacher",
+          thai: "ครู / อาจารย์",
+          phonetic: "/ทีช-เชอะ/",
+          type: "n.",
+          emoji: "🧑‍🏫",
+          exampleEn: "Our teacher teaches us English every Friday.",
+          exampleTh: "คุณครูสอนภาษาอังกฤษพวกเราทุกวันศุกร์"
+        },
+        {
+          id: "u3_4",
+          word: "police officer",
+          thai: "เจ้าหน้าที่ตำรวจ",
+          phonetic: "/พะ-ลีส ออฟ-ฟิ-เซอะ/",
+          type: "n.",
+          emoji: "👮",
+          exampleEn: "A police officer keeps our town safe.",
+          exampleTh: "ตำรวจช่วยดูแลเมืองของเราให้ปลอดภัย"
+        },
+        {
+          id: "u3_5",
+          word: "firefighter",
+          thai: "นักดับเพลิง",
+          phonetic: "/ไฟ-เออะ-ไฟท์-เทอะ/",
+          type: "n.",
+          emoji: "🧑‍🚒",
+          exampleEn: "The brave firefighter puts out the fire.",
+          exampleTh: "นักดับเพลิงผู้กล้าหาญดับไฟไหม้"
+        },
+        {
+          id: "u3_6",
+          word: "chef",
+          thai: "พ่อครัว / เชฟ",
+          phonetic: "/เชฟ/",
+          type: "n.",
+          emoji: "👨‍🍳",
+          exampleEn: "The chef cooks delicious food in the restaurant.",
+          exampleTh: "เชฟปรุงอาหารแสนอร่อยในร้านอาหาร"
+        },
+        {
+          id: "u3_7",
+          word: "pilot",
+          thai: "นักบิน",
+          phonetic: "/ไพ-เลิท/",
+          type: "n.",
+          emoji: "🧑‍✈️",
+          exampleEn: "A pilot flies airplanes across the sky.",
+          exampleTh: "นักบินขับเครื่องบินข้ามท้องฟ้า"
+        },
+        {
+          id: "u3_8",
+          word: "farmer",
+          thai: "ชาวนา / เกษตรกร",
+          phonetic: "/ฟาร์ม-เมอะ/",
+          type: "n.",
+          emoji: "🧑‍🌾",
+          exampleEn: "The farmer grows organic vegetables and rice.",
+          exampleTh: "ชาวนาปลูกผักออร์แกนิกและข้าว"
+        },
+        {
+          id: "u3_9",
+          word: "veterinarian (vet)",
+          thai: "สัตวแพทย์ (หมอรักษาสัตว์)",
+          phonetic: "/เวท-เทริ-แน-เรียน/",
+          type: "n.",
+          emoji: "🩺",
+          exampleEn: "I take my sick puppy to the vet.",
+          exampleTh: "ฉันพาลูกหมาที่ไม่สบายไปหาสัตวแพทย์"
+        },
+        {
+          id: "u3_10",
+          word: "artist",
+          thai: "ศิลปิน / นักวาดภาพ",
+          phonetic: "/อาร์-ทิสท์/",
+          type: "n.",
+          emoji: "🧑‍🎨",
+          exampleEn: "She is an artist; she paints beautiful portraits.",
+          exampleTh: "เธอเป็นศิลปิน เธอวาดรูปเหมือนที่สวยงามมาก"
+        },
+        {
+          id: "u3_11",
+          word: "hospital",
+          thai: "โรงพยาบาล",
+          phonetic: "/ฮอส-พิ-เทิล/",
+          type: "n.",
+          emoji: "🏥",
+          exampleEn: "Doctors and nurses work in the hospital.",
+          exampleTh: "แพทย์และพยาบาลทำงานที่โรงพยาบาล"
+        },
+        {
+          id: "u3_12",
+          word: "want to be",
+          thai: "อยากเป็น / ต้องการเป็น",
+          phonetic: "/ว็อนท์ ทู บี/",
+          type: "v. phrase",
+          emoji: "✨",
+          exampleEn: "What do you want to be in the future?",
+          exampleTh: "ในอนาคตเธออยากเป็นอะไรเหรอ?"
+        }
+      ],
+      dialogue: {
+        title: "Conversation: Dream Jobs",
+        titleTh: "บทสนทนา: อาชีพในฝัน",
+        speakers: [
+          { name: "Benny", avatar: "🐻", role: "หมีเบนนี่" },
+          { name: "Mia", avatar: "🐱", role: "แมวมีอา" }
+        ],
+        lines: [
+          { speaker: "Benny", text: "Mia, what do you want to be when you grow up?", textTh: "มีอา โตขึ้นเธออยากเป็นอะไรเหรอ?" },
+          { speaker: "Mia", text: "I want to be a vet! I love curing sick animals.", textTh: "ฉันอยากเป็นสัตวแพทย์จ้า! ฉันชอบรักษาสัตว์ที่ไม่สบาย" },
+          { speaker: "Benny", text: "That is wonderful! As for me, I want to be a pilot.", textTh: "ยอดเยี่ยมมากเลย! ส่วนฉันอยากเป็นนักบินล่ะ" },
+          { speaker: "Mia", text: "A pilot? Where does a pilot fly?", textTh: "นักบินเหรอ? นักบินบินไปที่ไหนบ้างล่ะ?" },
+          { speaker: "Benny", text: "A pilot flies airplanes around the world!", textTh: "นักบินขับเครื่องบินไปทั่วโลกเลยล่ะ!" }
+        ]
+      },
+      quiz: [
+        {
+          question: "Who works in a hospital and cures sick animals?",
+          questionTh: "ใครทำงานและรักษาสัตว์ที่เจ็บป่วย?",
+          options: ["a farmer", "a veterinarian (vet)", "a chef", "a police officer"],
+          answer: 1,
+          explanation: "veterinarian หรือ vet คือ สัตวแพทย์ ผู้รักษาสัตว์ป่วย"
+        },
+        {
+          question: "Fill in the blank: 'I want to be ________ artist.'",
+          questionTh: "เติมคำนำหน้านาม (article) ให้ถูกต้องหน้าคำว่า artist",
+          options: ["a", "an", "the", "two"],
+          answer: 1,
+          explanation: "artist ขึ้นต้นด้วยเสียงสระ (อ) จึงต้องใช้ an เช่น an artist, an engineer, an orange"
+        },
+        {
+          question: "Where does a chef work?",
+          questionTh: "เชฟ (พ่อครัว) ทำงานที่สถานที่ใด?",
+          options: ["in a hospital", "in a school", "in a restaurant", "in a farm"],
+          answer: 2,
+          explanation: "chef ทำงานปรุงอาหารใน restaurant (ร้านอาหาร)"
+        },
+        {
+          question: "What does a firefighter do?",
+          questionTh: "หน้าที่ของ firefighter (นักดับเพลิง) คือข้อใด?",
+          options: ["grows rice", "flies airplanes", "puts out fires", "teaches kids"],
+          answer: 2,
+          explanation: "firefighter มีหน้าที่ดับเพลิง (puts out fires)"
+        },
+        {
+          question: "A: What do you want to be? B: ________ want to be a teacher.",
+          questionTh: "ถาม 'you' ต้องตอบด้วยประธานคำว่าอะไร?",
+          options: ["He", "She", "I", "They"],
+          answer: 2,
+          explanation: "คำถามถาม What do you want to be? คนตอบจึงต้องตอบว่า 'I want to be...'"
+        }
+      ]
+    },
+
+    {
+      id: 4,
+      title: "Unit 4: Food, Drinks & Canteen",
+      titleTh: "อาหาร เครื่องดื่ม และการสั่งอาหาร",
+      description: "ชื่ออาหารเครื่องดื่ม การบอกราคา และการสั่งอาหารอย่างสุภาพ",
+      icon: "🍕",
+      color: "from-rose-400 to-red-600",
+      themeColor: "#ef4444",
+      grammarTip: {
+        title: "Grammar Tips: Polite Ordering & Countable/Uncountable",
+        titleTh: "ไวยากรณ์น่ารู้: การสั่งอาหารและการถามราคา",
+        rules: [
+          {
+            point: "การสั่งอาหารอย่างสุภาพ: Can I have ________, please?",
+            example: "Can I have some orange juice, please? (ขอน้ำส้มหน่อยได้ไหมครับ)"
+          },
+          {
+            point: "การถามและตอบราคา: How much is it? / How much are they?",
+            example: "How much is this pizza? ➡️ It is fifty baht."
+          },
+          {
+            point: "การใช้ some กับอาหารนับไม่ได้และนามพหูพจน์ในประโยคบอกเล่า/ขอร้อง",
+            example: "some milk, some water, some apples"
+          }
+        ]
+      },
+      words: [
+        {
+          id: "u4_1",
+          word: "fried rice",
+          thai: "ข้าวผัด",
+          phonetic: "/ไฟรด์ ไรส์/",
+          type: "n.",
+          emoji: "🍛",
+          exampleEn: "I often order chicken fried rice for lunch.",
+          exampleTh: "ฉันมักจะสั่งข้าวผัดไก่สำหรับมื้อเที่ยง"
+        },
+        {
+          id: "u4_2",
+          word: "noodles",
+          thai: "ก๋วยเตี๋ยว / บะหมี่",
+          phonetic: "/นู-เดิลส์/",
+          type: "n.",
+          emoji: "🍜",
+          exampleEn: "These hot noodles are very tasty.",
+          exampleTh: "ก๋วยเตี๋ยวร้อนๆ ชามนี้รสชาติอร่อยมาก"
+        },
+        {
+          id: "u4_3",
+          word: "sandwich",
+          thai: "แซนด์วิช",
+          phonetic: "/แซนดฺ-วิช/",
+          type: "n.",
+          emoji: "🥪",
+          exampleEn: "She packs a tuna sandwich for picnic.",
+          exampleTh: "เธอเตรียมแซนด์วิชทูน่าไปปิกนิก"
+        },
+        {
+          id: "u4_4",
+          word: "pizza",
+          thai: "พิซซ่า",
+          phonetic: "/พีท-ซา/",
+          type: "n.",
+          emoji: "🍕",
+          exampleEn: "We share a large cheese pizza together.",
+          exampleTh: "พวกเราแบ่งพิซซ่าหน้าชีสถาดใหญ่ด้วยกัน"
+        },
+        {
+          id: "u4_5",
+          word: "salad",
+          thai: "สลัดผัก",
+          phonetic: "/แซล-เลิด/",
+          type: "n.",
+          emoji: "🥗",
+          exampleEn: "Fresh salad is very healthy for our body.",
+          exampleTh: "สลัดผักสดมีประโยชน์ต่อสุขภาพร่างกายของเรามาก"
+        },
+        {
+          id: "u4_6",
+          word: "orange juice",
+          thai: "น้ำส้มคั้น",
+          phonetic: "/ออ-รินจ์ จูส/",
+          type: "n.",
+          emoji: "🍊",
+          exampleEn: "I drink a glass of orange juice every morning.",
+          exampleTh: "ฉันดื่มน้ำส้มหนึ่งแก้วทุกเช้า"
+        },
+        {
+          id: "u4_7",
+          word: "milk",
+          thai: "นม",
+          phonetic: "/มิลค์/",
+          type: "n.",
+          emoji: "🥛",
+          exampleEn: "Drinking milk makes your bones and teeth strong.",
+          exampleTh: "การดื่มนมช่วยให้กระดูกและฟันแข็งแรง"
+        },
+        {
+          id: "u4_8",
+          word: "water",
+          thai: "น้ำเปล่า",
+          phonetic: "/วอ-เทอะ/",
+          type: "n.",
+          emoji: "💧",
+          exampleEn: "You should drink eight glasses of water a day.",
+          exampleTh: "คุณควรดื่มน้ำสะอาดวันละ 8 แก้ว"
+        },
+        {
+          id: "u4_9",
+          word: "ice cream",
+          thai: "ไอศกรีม",
+          phonetic: "/ไอซ์ ครีม/",
+          type: "n.",
+          emoji: "🍨",
+          exampleEn: "Strawberry ice cream is sweet and cold.",
+          exampleTh: "ไอศกรีมสตรอว์เบอร์รีหวานและเย็นชื่นใจ"
+        },
+        {
+          id: "u4_10",
+          word: "soup",
+          thai: "ซุป / ต้มจืด",
+          phonetic: "/ซูพ/",
+          type: "n.",
+          emoji: "🍲",
+          exampleEn: "Hot corn soup is perfect for rainy days.",
+          exampleTh: "ซุปข้าวโพดร้อนๆ เหมาะมากสำหรับวันฝนตก"
+        },
+        {
+          id: "u4_11",
+          word: "delicious",
+          thai: "อร่อย",
+          phonetic: "/ดิ-ลิ-เชิส/",
+          type: "adj.",
+          emoji: "😋",
+          exampleEn: "This chocolate cake is so delicious!",
+          exampleTh: "เค้กช็อกโกแลตชิ้นนี้อร่อยสุดๆ เลย!"
+        },
+        {
+          id: "u4_12",
+          word: "How much",
+          thai: "ราคาเท่าไร",
+          phonetic: "/ฮาว มัช/",
+          type: "phrase",
+          emoji: "💵",
+          exampleEn: "How much is this bottle of juice?",
+          exampleTh: "น้ำผลไม้ขวดนี้ราคาเท่าไรครับ?"
+        }
+      ],
+      dialogue: {
+        title: "Conversation: Ordering Food at the Canteen",
+        titleTh: "บทสนทนา: การสั่งอาหารที่โรงอาหาร",
+        speakers: [
+          { name: "Benny", avatar: "🐻", role: "หมีเบนนี่" },
+          { name: "Chef Cat", avatar: "🐱", role: "เชฟแมวเหมียว" }
+        ],
+        lines: [
+          { speaker: "Chef Cat", text: "Hello! What would you like to eat today?", textTh: "สวัสดีจ้า วันนี้รับอะไรดีจ๊ะ?" },
+          { speaker: "Benny", text: "Can I have some fried rice and a glass of milk, please?", textTh: "ขอข้าวผัดกับนมหนึ่งแก้วครับ" },
+          { speaker: "Chef Cat", text: "Sure thing! Here is your warm fried rice and cold milk.", textTh: "ได้แน่นอนจ้า! นี่จ้ะ ข้าวผัดอุ่นๆ และนมเย็นๆ" },
+          { speaker: "Benny", text: "Thank you. How much is it?", textTh: "ขอบคุณครับ ราคาเท่าไรครับ?" },
+          { speaker: "Chef Cat", text: "It is thirty-five baht, please.", textTh: "ทั้งหมด 35 บาทจ้า" }
+        ]
+      },
+      quiz: [
+        {
+          question: "How do you politely order food in English?",
+          questionTh: "ข้อใดคือประโยคสั่งอาหารอย่างสุภาพ?",
+          options: ["Give me food now!", "Can I have some noodles, please?", "I want eat.", "Where is money?"],
+          answer: 1,
+          explanation: "การสั่งอาหารอย่างสุภาพใช้รูปประโยค 'Can I have ________, please?'"
+        },
+        {
+          question: "Which drink is healthy and makes bones strong?",
+          questionTh: "เครื่องดื่มใดมีประโยชน์และช่วยให้กระดูกแข็งแรง?",
+          options: ["cola", "milk", "coffee", "tea"],
+          answer: 1,
+          explanation: "milk (นม) มีแคลเซียมช่วยเสริมสร้างกระดูกและฟัน"
+        },
+        {
+          question: "Customer: 'How much is this ice cream?' Seller: '________ twenty baht.'",
+          questionTh: "ตอบราคาไอศกรีม 1 ถ้วย (นามเอกพจน์) ด้วยคำใด?",
+          options: ["They are", "It is", "We are", "You are"],
+          answer: 1,
+          explanation: "สิ่งของชิ้นเดียว (เอกพจน์) ใช้สรรพนาม It is... เช่น It is twenty baht."
+        },
+        {
+          question: "Which food matches the emoji 🥪?",
+          questionTh: "คำศัพท์ใดตรงกับรูปภาพ 🥪?",
+          options: ["pizza", "salad", "sandwich", "soup"],
+          answer: 2,
+          explanation: "sandwich แปลว่า แซนด์วิช"
+        },
+        {
+          question: "What word means 'อร่อย' in English?",
+          questionTh: "คำศัพท์ภาษาอังกฤษข้อใดแปลว่า 'อร่อย'?",
+          options: ["difficult", "hungry", "delicious", "quiet"],
+          answer: 2,
+          explanation: "delicious แปลว่า อร่อย"
+        }
+      ]
+    },
+
+    {
+      id: 5,
+      title: "Unit 5: Amazing Animals & Comparatives",
+      titleTh: "สัตว์โลกน่ารัก & การเปรียบเทียบ",
+      description: "ชื่อสัตว์ป่า สัตว์เลี้ยง และการเปรียบเทียบขั้นกว่า (taller, bigger, faster)",
+      icon: "🦁",
+      color: "from-amber-500 to-yellow-600",
+      themeColor: "#d97706",
+      grammarTip: {
+        title: "Grammar Tips: Comparative Adjectives (ขั้นกว่า)",
+        titleTh: "ไวยากรณ์น่ารู้: การเปรียบเทียบคำคุณศัพท์ขั้นกว่า",
+        rules: [
+          {
+            point: "การเปรียบเทียบ 2 สิ่ง: คำคุณศัพท์ + er + than (กว่า)",
+            example: "A giraffe is taller than an elephant. (ยีราฟสูงกว่าช้าง)"
+          },
+          {
+            point: "กฎการเติม -er: คำสั้นสระเดี่ยวพยัญชนะเดี่ยว เบิ้ลตัวท้ายก่อนเติม er",
+            example: "big ➡️ bigger than | fast ➡️ faster than | slow ➡️ slower than"
+          },
+          {
+            point: "การบอกความสามารถด้วย can / can't",
+            example: "A cheetah can run fast. / A penguin can't fly."
+          }
+        ]
+      },
+      words: [
+        {
+          id: "u5_1",
+          word: "elephant",
+          thai: "ช้าง",
+          phonetic: "/เอล-เลอะ-เฟินท์/",
+          type: "n.",
+          emoji: "🐘",
+          exampleEn: "An elephant has large ears and a long trunk.",
+          exampleTh: "ช้างมีหูใหญ่และมีงวงยาว"
+        },
+        {
+          id: "u5_2",
+          word: "giraffe",
+          thai: "ยีราฟ",
+          phonetic: "/จิ-ราฟ/",
+          type: "n.",
+          emoji: "🦒",
+          exampleEn: "A giraffe has a very long neck.",
+          exampleTh: "ยีราฟมีคอยาวมาก"
+        },
+        {
+          id: "u5_3",
+          word: "lion",
+          thai: "สิงโต",
+          phonetic: "/ไล-เอิน/",
+          type: "n.",
+          emoji: "🦁",
+          exampleEn: "The lion is known as the king of the jungle.",
+          exampleTh: "สิงโตได้รับสมญานามว่าเป็นเจ้าป่า"
+        },
+        {
+          id: "u5_4",
+          word: "cheetah",
+          thai: "เสือชีตาห์",
+          phonetic: "/ชี-ทา/",
+          type: "n.",
+          emoji: "🐆",
+          exampleEn: "A cheetah can run faster than any land animal.",
+          exampleTh: "เสือชีตาห์สามารถวิ่งได้เร็วกว่าสัตว์บกทุกชนิด"
+        },
+        {
+          id: "u5_5",
+          word: "monkey",
+          thai: "ลิง",
+          phonetic: "/มัง-คี/",
+          type: "n.",
+          emoji: "🐵",
+          exampleEn: "The clever monkey swings from tree to tree.",
+          exampleTh: "ลิงแสนฉลาดโหนจากต้นไม้หนึ่งไปอีกต้นหนึ่ง"
+        },
+        {
+          id: "u5_6",
+          word: "dolphin",
+          thai: "โลมา",
+          phonetic: "/ดอล-ฟิน/",
+          type: "n.",
+          emoji: "🐬",
+          exampleEn: "Dolphins are friendly and smart marine animals.",
+          exampleTh: "โลมาเป็นสัตว์ทะเลที่ฉลาดและเป็นมิตร"
+        },
+        {
+          id: "u5_7",
+          word: "rabbit",
+          thai: "กระต่าย",
+          phonetic: "/แรบ-บิท/",
+          type: "n.",
+          emoji: "🐰",
+          exampleEn: "The white rabbit hops across the green grass.",
+          exampleTh: "กระต่ายสีขาวกระโดดข้ามสนามหญ้าเขียว"
+        },
+        {
+          id: "u5_8",
+          word: "hippo",
+          thai: "ฮิปโปโปเตมัส",
+          phonetic: "/ฮิป-โป/",
+          type: "n.",
+          emoji: "🦛",
+          exampleEn: "A hippo loves soaking in muddy river water.",
+          exampleTh: "ฮิปโปชอบแช่ตัวในน้ำแม่น้ำโคลน"
+        },
+        {
+          id: "u5_9",
+          word: "taller than",
+          thai: "สูงกว่า",
+          phonetic: "/ทอล-เลอะ แดน/",
+          type: "adj.",
+          emoji: "📏",
+          exampleEn: "Giraffes are taller than horses.",
+          exampleTh: "ยีราฟสูงกว่าม้า"
+        },
+        {
+          id: "u5_10",
+          word: "faster than",
+          thai: "เร็วกว่า",
+          phonetic: "/ฟาส-เทอะ แดน/",
+          type: "adj.",
+          emoji: "⚡",
+          exampleEn: "The cheetah is faster than the lion.",
+          exampleTh: "เสือชีตาห์วิ่งเร็วกว่าสิงโต"
+        },
+        {
+          id: "u5_11",
+          word: "bigger than",
+          thai: "ใหญ่กว่า",
+          phonetic: "/บิก-เกอะ แดน/",
+          type: "adj.",
+          emoji: "🐘",
+          exampleEn: "An elephant is bigger than a monkey.",
+          exampleTh: "ช้างตัวใหญ่กว่าลิง"
+        },
+        {
+          id: "u5_12",
+          word: "slower than",
+          thai: "ช้ากว่า",
+          phonetic: "/สโล-เวอะ แดน/",
+          type: "adj.",
+          emoji: "🐢",
+          exampleEn: "A turtle is slower than a rabbit.",
+          exampleTh: "เต่าเคลื่อนที่ช้ากว่ากระต่าย"
+        }
+      ],
+      dialogue: {
+        title: "Conversation: At the Safari World",
+        titleTh: "บทสนทนา: เที่ยวสวนสัตว์ซาฟารี",
+        speakers: [
+          { name: "Benny", avatar: "🐻", role: "หมีเบนนี่" },
+          { name: "Mia", avatar: "🐱", role: "แมวมีอา" }
+        ],
+        lines: [
+          { speaker: "Benny", text: "Look at that giraffe! It is so tall!", textTh: "ดูยีราฟตัวนั้นสิ! ตัวสูงมากเลย!" },
+          { speaker: "Mia", text: "Yes! A giraffe is taller than an elephant.", textTh: "ใช่แล้วจ้า ยีราฟสูงกว่าช้างอีกนะ" },
+          { speaker: "Benny", text: "Which animal is the fastest here?", textTh: "แล้วสัตว์ตัวไหนวิ่งเร็วที่สุดที่นี่เหรอ?" },
+          { speaker: "Mia", text: "The cheetah! It is much faster than the lion.", textTh: "เสือชีตาห์ไงล่ะ! มันวิ่งเร็วกว่าสิงโตมากเลย" },
+          { speaker: "Benny", text: "Animals are truly amazing!", textTh: "สัตว์โลกช่างมหัศจรรย์จริงๆ เลย!" }
+        ]
+      },
+      quiz: [
+        {
+          question: "Which sentence correctly compares the height of a giraffe and an elephant?",
+          questionTh: "ประโยคเปรียบเทียบความสูงข้อใดถูกต้อง?",
+          options: [
+            "A giraffe is taller than an elephant.",
+            "An elephant is taller than a giraffe.",
+            "A giraffe is more tall.",
+            "A giraffe tall than an elephant."
+          ],
+          answer: 0,
+          explanation: "tall ขั้นกว่าคือ taller than ดังนั้นประโยคที่ถูกต้องคือ 'A giraffe is taller than an elephant.'"
+        },
+        {
+          question: "The comparative form of 'big' is ________.",
+          questionTh: "รูปเปรียบเทียบขั้นกว่าของคำว่า 'big' (ใหญ่) คือข้อใด?",
+          options: ["biger than", "bigger than", "more big", "biggest"],
+          answer: 1,
+          explanation: "big มีสระเสียงสั้น 1 ตัว พยัญชนะสะกด 1 ตัว ต้องซ้ำ g อีกตัวก่อนเติม er เป็น bigger than"
+        },
+        {
+          question: "Which animal can run the fastest?",
+          questionTh: "สัตว์บกชนิดใดวิ่งเร็วที่สุด?",
+          options: ["turtle", "hippo", "cheetah", "elephant"],
+          answer: 2,
+          explanation: "cheetah (เสือชีตาห์) วิ่งได้เร็วถึง 100-120 กม./ชม."
+        },
+        {
+          question: "A turtle is ________ than a rabbit.",
+          questionTh: "เต่าเคลื่อนที่ ________ กระต่าย",
+          options: ["faster", "slower", "taller", "heavier"],
+          answer: 1,
+          explanation: "slower than แปลว่า ช้ากว่า (เต่าเคลื่อนที่ช้ากว่ากระต่าย)"
+        },
+        {
+          question: "Complete: 'A dolphin ________ swim very well.'",
+          questionTh: "เติมคำช่วยบอกความสามารถ 'สามารถว่ายน้ำได้ดีมาก'",
+          options: ["can", "can't", "is", "are"],
+          answer: 0,
+          explanation: "can แปลว่า สามารถ (ทำได้) โลมาสามารถว่ายน้ำได้อย่างยอดเยี่ยม"
+        }
+      ]
+    },
+
+    {
+      id: 6,
+      title: "Unit 6: Places in Town & Giving Directions",
+      titleTh: "สถานที่ในเมืองและการบอกทาง",
+      description: "สถานที่ต่างๆ ในชุมชน และคำบอกตำแหน่ง (next to, opposite, turn left, turn right)",
+      icon: "🗺️",
+      color: "from-cyan-500 to-blue-600",
+      themeColor: "#06b6d4",
+      grammarTip: {
+        title: "Grammar Tips: Prepositions of Place & Asking Directions",
+        titleTh: "ไวยากรณ์น่ารู้: คำบุพบทบอกตำแหน่งและการถามทาง",
+        rules: [
+          {
+            point: "Where is the ________? (ถามว่าสถานที่นี้อยู่ที่ไหน)",
+            example: "Where is the bank? ➡️ It is next to the hospital."
+          },
+          {
+            point: "Prepositions of Place: next to (ติดกับ), opposite (ตรงข้าม), between... and... (อยู่ระหว่าง)",
+            example: "The cinema is opposite the park."
+          },
+          {
+            point: "Giving Directions: Turn left (เลี้ยวซ้าย), Turn right (เลี้ยวขวา), Go straight (ตรงไป)",
+            example: "Go straight and turn left at the corner."
+          }
+        ]
+      },
+      words: [
+        {
+          id: "u6_1",
+          word: "bank",
+          thai: "ธนาคาร",
+          phonetic: "/แบงค์/",
+          type: "n.",
+          emoji: "🏦",
+          exampleEn: "You can keep your savings safely in the bank.",
+          exampleTh: "เธอสามารถฝากเงินออมไว้อย่างปลอดภัยในธนาคาร"
+        },
+        {
+          id: "u6_2",
+          word: "supermarket",
+          thai: "ซูเปอร์มาร์เก็ต / ห้างสรรพสินค้า",
+          phonetic: "/ซู-เพอะ-มาร์-เก็ต/",
+          type: "n.",
+          emoji: "🛒",
+          exampleEn: "Mom buys fresh fruits and milk at the supermarket.",
+          exampleTh: "คุณแม่ซื้อผลไม้สดและนมที่ซูเปอร์มาร์เก็ต"
+        },
+        {
+          id: "u6_3",
+          word: "post office",
+          thai: "ที่ทำการไปรษณีย์",
+          phonetic: "/โพสท์ ออฟ-ฟิส/",
+          type: "n.",
+          emoji: "📮",
+          exampleEn: "I send a postcard to my friend at the post office.",
+          exampleTh: "ฉันส่งโปสการ์ดหาเพื่อนที่ที่ทำการไปรษณีย์"
+        },
+        {
+          id: "u6_4",
+          word: "cinema",
+          thai: "โรงภาพยนตร์ / โรงหนัง",
+          phonetic: "/ซิ-เนะ-มา/",
+          type: "n.",
+          emoji: "🎬",
+          exampleEn: "We watch an animated movie at the cinema.",
+          exampleTh: "พวกเราดูการ์ตูนแอนิเมชันที่โรงภาพยนตร์"
+        },
+        {
+          id: "u6_5",
+          word: "temple",
+          thai: "วัด",
+          phonetic: "/เทม-เพิล/",
+          type: "n.",
+          emoji: "🛕",
+          exampleEn: "Families visit the peaceful temple on holidays.",
+          exampleTh: "ครอบครัวไปไหว้พระที่วัดอันเงียบสงบในวันหยุด"
+        },
+        {
+          id: "u6_6",
+          word: "park",
+          thai: "สวนสาธารณะ",
+          phonetic: "/พาร์ค/",
+          type: "n.",
+          emoji: "🌳",
+          exampleEn: "Children ride bicycles in the green park.",
+          exampleTh: "เด็กๆ ปั่นจักรยานในสวนสาธารณะอันร่มรื่น"
+        },
+        {
+          id: "u6_7",
+          word: "next to",
+          thai: "ถัดจาก / ติดกับ",
+          phonetic: "/เน็กซท์ ทู/",
+          type: "prep.",
+          emoji: "➡️",
+          exampleEn: "The bakery is next to the bookstore.",
+          exampleTh: "ร้านขนมปังอยู่ติดกับร้านหนังสือ"
+        },
+        {
+          id: "u6_8",
+          word: "opposite",
+          thai: "ตรงข้ามกับ",
+          phonetic: "/อ็อพ-พะ-ซิท/",
+          type: "prep.",
+          emoji: "↔️",
+          exampleEn: "The school is opposite the market across the road.",
+          exampleTh: "โรงเรียนอยู่ตรงข้ามกับตลาดข้ามถนนไป"
+        },
+        {
+          id: "u6_9",
+          word: "between",
+          thai: "อยู่ระหว่าง (สองสิ่ง)",
+          phonetic: "/บิ-ทวีน/",
+          type: "prep.",
+          emoji: "🥪",
+          exampleEn: "The bank is between the hospital and the cafe.",
+          exampleTh: "ธนาคารอยู่ระหว่างโรงพยาบาลและคาเฟ่"
+        },
+        {
+          id: "u6_10",
+          word: "turn left",
+          thai: "เลี้ยวซ้าย",
+          phonetic: "/เทิร์น เลฟท์/",
+          type: "v. phrase",
+          emoji: "⬅️",
+          exampleEn: "Turn left at the traffic light.",
+          exampleTh: "เลี้ยวซ้ายตรงสัญญาณไฟจราจร"
+        },
+        {
+          id: "u6_11",
+          word: "turn right",
+          thai: "เลี้ยวขวา",
+          phonetic: "/เทิร์น ไรท์/",
+          type: "v. phrase",
+          emoji: "➡️",
+          exampleEn: "Turn right and you will see the post office.",
+          exampleTh: "เลี้ยวขวาแล้วคุณจะเห็นที่ทำการไปรษณีย์"
+        },
+        {
+          id: "u6_12",
+          word: "go straight",
+          thai: "ตรงไป",
+          phonetic: "/โก สเตรท/",
+          type: "v. phrase",
+          emoji: "⬆️",
+          exampleEn: "Go straight on this road for 100 meters.",
+          exampleTh: "เดินตรงไปตามถนนสายนี้ประมาณ 100 เมตร"
+        }
+      ],
+      dialogue: {
+        title: "Conversation: Asking for Directions",
+        titleTh: "บทสนทนา: การถามทางในเมือง",
+        speakers: [
+          { name: "Benny", avatar: "🐻", role: "หมีเบนนี่" },
+          { name: "Mia", avatar: "🐱", role: "แมวมีอา" }
+        ],
+        lines: [
+          { speaker: "Benny", text: "Excuse me, Mia. Where is the post office?", textTh: "ขอโทษนะมีอา ที่ทำการไปรษณีย์อยู่ที่ไหนเหรอ?" },
+          { speaker: "Mia", text: "It is on Main Street, next to the bank.", textTh: "อยู่บนถนนสายหลัก ติดกับธนาคารเลยจ้า" },
+          { speaker: "Benny", text: "How can I get there from here?", textTh: "แล้วฉันจะไปที่นั่นจากตรงนี้ได้อย่างไรครับ?" },
+          { speaker: "Mia", text: "Go straight and turn right at the corner. You will see it!", textTh: "เดินตรงไปแล้วเลี้ยวขวาตรงหัวมุม ก็จะเห็นทันทีเลยจ้ะ!" },
+          { speaker: "Benny", text: "Thank you so much! Have a great day!", textTh: "ขอบคุณมากเลยนะมีอา ขอให้เป็นวันที่ดีนะ!" }
+        ]
+      },
+      quiz: [
+        {
+          question: "Where do people go to send letters or parcels?",
+          questionTh: "สถานที่ใดที่ผู้คนไปส่งจดหมายหรือพัสดุ?",
+          options: ["cinema", "post office", "temple", "supermarket"],
+          answer: 1,
+          explanation: "post office แปลว่า ที่ทำการไปรษณีย์ ใช้ส่งจดหมายและพัสดุ"
+        },
+        {
+          question: "What does 'turn left' mean in Thai?",
+          questionTh: "'turn left' มีความหมายตรงกับข้อใด?",
+          options: ["เลี้ยวขวา", "เลี้ยวซ้าย", "ตรงไป", "กลับรถ"],
+          answer: 1,
+          explanation: "left แปลว่า ซ้าย ดังนั้น turn left คือ เลี้ยวซ้าย ส่วน turn right คือ เลี้ยวขวา"
+        },
+        {
+          question: "The bank is ________ the hospital and the bookstore.",
+          questionTh: "คำบุพบทใดหมายถึง 'อยู่ระหว่าง (สองสิ่ง)'?",
+          options: ["between", "under", "on", "in"],
+          answer: 0,
+          explanation: "between... and... แปลว่า อยู่ระหว่างสองสิ่ง"
+        },
+        {
+          question: "How do you ask for directions politely?",
+          questionTh: "คำขึ้นต้นเพื่อสอบถามทางอย่างสุภาพคือข้อใด?",
+          options: ["Hey you!", "Excuse me,", "Stop there!", "Give me!"],
+          answer: 1,
+          explanation: "Excuse me, ... เป็นการกล่าวขอโทษหรือขอรบกวนเวลาสอบถามทางอย่างสุภาพ"
+        },
+        {
+          question: "If place A and place B face each other across the street, they are ________.",
+          questionTh: "หากสถานที่สองแห่งอยู่ฝั่งตรงข้ามกันข้ามถนน จะใช้คำว่าอะไร?",
+          options: ["opposite", "behind", "in front of", "under"],
+          answer: 0,
+          explanation: "opposite แปลว่า อยู่ตรงข้ามกัน"
+        }
+      ]
+    }
+  ],
+
+  badges: [
+    { id: "b_first_step", name: "First Step 🌟", desc: "เริ่มเรียนบทแรกสำเร็จ", icon: "🌱" },
+    { id: "b_spelling_star", name: "Spelling Star 🔤", desc: "สะกดคำศัพท์ถูกต้อง 10 คำ", icon: "⭐" },
+    { id: "b_listen_master", name: "Sharp Ears 🎧", desc: "ฟังเสียงตอบถูกในเกมฟังเสียง", icon: "👂" },
+    { id: "b_quiz_champ", name: "Quiz Champion 🏆", desc: "ทำคะแนนแบบทดสอบได้เต็ม 5/5", icon: "👑" },
+    { id: "b_word_hunter", name: "Word Hunter 🏹", desc: "สะสมคำศัพท์ครบ 30 คำ", icon: "🎯" },
+    { id: "b_speed_match", name: "Memory Master 🧠", desc: "ชนะเกมจับคู่ความจำ", icon: "⚡" },
+    { id: "b_daily_routine", name: "Time Keeper ⏰", desc: "พิชิต Unit 1 สำเร็จ", icon: "⏰" },
+    { id: "b_school_star", name: "School Explorer 📚", desc: "พิชิต Unit 2 สำเร็จ", icon: "🎒" },
+    { id: "b_dream_job", name: "Future Star 👩‍⚕️", desc: "พิชิต Unit 3 สำเร็จ", icon: "✨" },
+    { id: "b_all_rounder", name: "Grade 4 Graduate 🎓", desc: "ผ่านแบบทดสอบครบทุกหน่วย!", icon: "🎖️" }
+  ]
+};
+
+// ระบบเสียงประกอบ (Web Audio API สังเคราะห์ ไม่ต้องต่อเน็ต) & ระบบอ่านออกเสียง (Web Speech API)
+class SoundManager {
+  constructor() {
+    this.audioCtx = null;
+    this.soundEnabled = true;
+    this.voiceRate = 0.82; // ความเร็วพอดีสำหรับน้องๆ ป.4 ฟังชัดเจน
+    this.preferredVoice = null;
+    this.initAudioContext();
+    this.initSpeech();
+  }
+
+  initAudioContext() {
+    try {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      if (AudioContext) {
+        this.audioCtx = new AudioContext();
+      }
+    } catch (e) {
+      console.warn("Web Audio API not supported", e);
+    }
+  }
+
+  ensureContextRunning() {
+    if (this.audioCtx && this.audioCtx.state === 'suspended') {
+      this.audioCtx.resume();
+    }
+  }
+
+  initSpeech() {
+    if ('speechSynthesis' in window) {
+      const loadVoices = () => {
+        const voices = window.speechSynthesis.getVoices();
+        // พยายามเลือกเสียงภาษาอังกฤษสำเนียงเป็นธรรมชาติ
+        this.preferredVoice = voices.find(v => v.lang.startsWith('en') && (v.name.includes('Natural') || v.name.includes('Google') || v.name.includes('Samantha') || v.name.includes('David') || v.name.includes('Zira'))) 
+          || voices.find(v => v.lang.startsWith('en')) 
+          || null;
+      };
+
+      loadVoices();
+      if (speechSynthesis.onvoiceschanged !== undefined) {
+        speechSynthesis.onvoiceschanged = loadVoices;
+      }
+    }
+  }
+
+  toggleSound() {
+    this.soundEnabled = !this.soundEnabled;
+    return this.soundEnabled;
+  }
+
+  speak(text, onEnd) {
+    if (!('speechSynthesis' in window)) return;
+    try {
+      window.speechSynthesis.cancel(); // หยุดเสียงเก่าก่อน
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'en-US';
+      utterance.rate = this.voiceRate;
+      utterance.pitch = 1.05; // โทนเสียงสดใสเป็นมิตร
+      if (this.preferredVoice) {
+        utterance.voice = this.preferredVoice;
+      }
+      if (onEnd) {
+        utterance.onend = onEnd;
+      }
+      window.speechSynthesis.speak(utterance);
+    } catch (e) {
+      console.warn("Speech error:", e);
+    }
+  }
+
+  // เสียงสังเคราะห์สำเร็จ (Ding-Dong / Chime)
+  playSuccess() {
+    if (!this.soundEnabled || !this.audioCtx) return;
+    this.ensureContextRunning();
+    const now = this.audioCtx.currentTime;
+    const osc = this.audioCtx.createOscillator();
+    const gain = this.audioCtx.createGain();
+
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(523.25, now); // C5
+    osc.frequency.setValueAtTime(659.25, now + 0.1); // E5
+    osc.frequency.setValueAtTime(783.99, now + 0.2); // G5
+    osc.frequency.setValueAtTime(1046.50, now + 0.3); // C6
+
+    gain.gain.setValueAtTime(0.2, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
+
+    osc.connect(gain);
+    gain.connect(this.audioCtx.destination);
+
+    osc.start(now);
+    osc.stop(now + 0.6);
+  }
+
+  // เสียงสังเคราะห์เมื่อตอบผิด (Boop อ่อนโยน ไม่ตกใจ)
+  playError() {
+    if (!this.soundEnabled || !this.audioCtx) return;
+    this.ensureContextRunning();
+    const now = this.audioCtx.currentTime;
+    const osc = this.audioCtx.createOscillator();
+    const gain = this.audioCtx.createGain();
+
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(260, now);
+    osc.frequency.exponentialRampToValueAtTime(150, now + 0.25);
+
+    gain.gain.setValueAtTime(0.2, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+
+    osc.connect(gain);
+    gain.connect(this.audioCtx.destination);
+
+    osc.start(now);
+    osc.stop(now + 0.25);
+  }
+
+  // เสียงคลิกเบาๆ
+  playClick() {
+    if (!this.soundEnabled || !this.audioCtx) return;
+    this.ensureContextRunning();
+    const now = this.audioCtx.currentTime;
+    const osc = this.audioCtx.createOscillator();
+    const gain = this.audioCtx.createGain();
+
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(800, now);
+    gain.gain.setValueAtTime(0.08, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+
+    osc.connect(gain);
+    gain.connect(this.audioCtx.destination);
+
+    osc.start(now);
+    osc.stop(now + 0.05);
+  }
+
+  // เสียงดาวเปล่งประกาย
+  playStar() {
+    if (!this.soundEnabled || !this.audioCtx) return;
+    this.ensureContextRunning();
+    const now = this.audioCtx.currentTime;
+    const notes = [659.25, 783.99, 987.77, 1318.51]; // E5, G5, B5, E6
+    notes.forEach((freq, i) => {
+      const osc = this.audioCtx.createOscillator();
+      const gain = this.audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, now + i * 0.08);
+      gain.gain.setValueAtTime(0.15, now + i * 0.08);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.08 + 0.3);
+      osc.connect(gain);
+      gain.connect(this.audioCtx.destination);
+      osc.start(now + i * 0.08);
+      osc.stop(now + i * 0.08 + 0.3);
+    });
+  }
+
+  // เสียงเฉลิมฉลองเมื่อจบด่าน / สอบผ่าน (Fanfare)
+  playFanfare() {
+    if (!this.soundEnabled || !this.audioCtx) return;
+    this.ensureContextRunning();
+    const now = this.audioCtx.currentTime;
+    const melody = [
+      { f: 523.25, t: 0, d: 0.12 }, // C5
+      { f: 523.25, t: 0.14, d: 0.12 }, // C5
+      { f: 523.25, t: 0.28, d: 0.12 }, // C5
+      { f: 659.25, t: 0.42, d: 0.25 }, // E5
+      { f: 783.99, t: 0.70, d: 0.4 },  // G5
+      { f: 1046.5, t: 1.15, d: 0.6 }   // C6
+    ];
+
+    melody.forEach(item => {
+      const osc = this.audioCtx.createOscillator();
+      const gain = this.audioCtx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(item.f, now + item.t);
+      gain.gain.setValueAtTime(0.25, now + item.t);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + item.t + item.d);
+      osc.connect(gain);
+      gain.connect(this.audioCtx.destination);
+      osc.start(now + item.t);
+      osc.stop(now + item.t + item.d);
+    });
+  }
+}
+
+const sounds = new SoundManager();
+
+// ระบบเฉลิมฉลองพลุกระดาษ (Confetti Canvas)
+class ConfettiManager {
+  constructor() {
+    this.canvas = null;
+    this.ctx = null;
+    this.particles = [];
+    this.animationId = null;
+    this.init();
+  }
+
+  init() {
+    this.canvas = document.createElement('canvas');
+    this.canvas.id = 'confetti-canvas';
+    this.canvas.style.position = 'fixed';
+    this.canvas.style.top = '0';
+    this.canvas.style.left = '0';
+    this.canvas.style.width = '100vw';
+    this.canvas.style.height = '100vh';
+    this.canvas.style.pointerEvents = 'none';
+    this.canvas.style.zIndex = '9999';
+    document.body.appendChild(this.canvas);
+    this.ctx = this.canvas.getContext('2d');
+    this.resize();
+    window.addEventListener('resize', () => this.resize());
+  }
+
+  resize() {
+    if (!this.canvas) return;
+    this.canvas.width = window.innerWidth;
+    this.canvas.height = window.innerHeight;
+  }
+
+  fire(durationMs = 3000) {
+    this.particles = [];
+    const colors = ['#f43f5e', '#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899', '#06b6d4', '#eab308'];
+    const count = 120;
+
+    for (let i = 0; i < count; i++) {
+      this.particles.push({
+        x: Math.random() * this.canvas.width,
+        y: -10 - Math.random() * 50,
+        w: Math.random() * 10 + 6,
+        h: Math.random() * 8 + 4,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        vx: (Math.random() - 0.5) * 4,
+        vy: Math.random() * 3 + 3,
+        rot: Math.random() * 360,
+        vRot: (Math.random() - 0.5) * 8,
+        opacity: 1
+      });
+    }
+
+    const startTime = Date.now();
+    if (this.animationId) cancelAnimationFrame(this.animationId);
+
+    const animate = () => {
+      const elapsed = Date.now() - startTime;
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+      this.particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.rot += p.vRot;
+        if (elapsed > durationMs - 1000) {
+          p.opacity = Math.max(0, 1 - (elapsed - (durationMs - 1000)) / 1000);
+        }
+
+        this.ctx.save();
+        this.ctx.globalAlpha = p.opacity;
+        this.ctx.translate(p.x, p.y);
+        this.ctx.rotate((p.rot * Math.PI) / 180);
+        this.ctx.fillStyle = p.color;
+        this.ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+        this.ctx.restore();
+      });
+
+      if (elapsed < durationMs) {
+        this.animationId = requestAnimationFrame(animate);
+      } else {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      }
+    };
+
+    this.animationId = requestAnimationFrame(animate);
+  }
+}
+
+let confetti = null;
+window.addEventListener('DOMContentLoaded', () => {
+  confetti = new ConfettiManager();
+});
+
+// ตรรกะหลักของแอพพลิเคชัน English Adventure ป.4
+class EnglishApp {
+  constructor() {
+    this.currentUnitId = 1;
+    this.currentTab = 'units';
+    this.currentMiniGame = 'spelling';
+    
+    // โหลดข้อมูลนักเรียนจาก LocalStorage
+    this.userData = this.loadUserData();
+    
+    // สถานะมินิเกมสะกดคำ
+    this.spellingState = {
+      wordObj: null,
+      letters: [],
+      userLetters: [],
+      usedIndices: []
+    };
+
+    // สถานะมินิเกมจับคู่
+    this.memoryState = {
+      cards: [],
+      flippedCards: [],
+      matchedCount: 0,
+      totalPairs: 0,
+      locked: false
+    };
+
+    // สถานะมินิเกมฟังเสียง
+    this.listeningState = {
+      targetWord: null,
+      options: [],
+      answered: false
+    };
+
+    // สถานะแบบทดสอบ
+    this.quizState = {
+      questions: [],
+      currentIndex: 0,
+      score: 0,
+      selectedAnswer: null,
+      answered: false
+    };
+
+    // Mascot Tips
+    this.mascotTips = [
+      "กดที่รูปลำโพงเพื่อฟังเสียงฝรั่งได้เลยนะ! 🐻",
+      "รู้ไหมว่าการจำคำศัพท์วันละ 5 คำ จะทำให้น้องๆ เก่งอังกฤษเร็วมาก!",
+      "ลองกดฟังสำเนียงแล้วพูดตามดูนะ ช่วยให้ออกเสียงได้เป๊ะขึ้น!",
+      "พิชิตแบบทดสอบให้ได้ 5 เต็มเพื่อรับเหรียญ Quiz Champion นะครับ!",
+      "เกียรติบัตรสามารถกดพิมพ์หรือบันทึกเป็น PDF เก็บไว้ชื่นชมได้ด้วยนะ!"
+    ];
+    this.currentTipIndex = 0;
+
+    this.init();
+  }
+
+  loadUserData() {
+    const defaultData = {
+      name: "น้องคนเก่ง",
+      avatar: "🐻",
+      classroom: "ป.4/1",
+      school: "โรงเรียนประถมศึกษา",
+      stars: 0,
+      completedQuizzes: {}, // { unitId: maxScore }
+      unlockedBadges: ["b_first_step"]
+    };
+
+    try {
+      const saved = localStorage.getItem('eng_p4_user_data');
+      return saved ? Object.assign(defaultData, JSON.parse(saved)) : defaultData;
+    } catch (e) {
+      return defaultData;
+    }
+  }
+
+  saveUserData() {
+    try {
+      localStorage.setItem('eng_p4_user_data', JSON.stringify(this.userData));
+    } catch (e) {
+      console.warn("Storage error", e);
+    }
+    this.updateUserUI();
+  }
+
+  init() {
+    this.updateUserUI();
+    this.renderUnitsList();
+    this.renderCurrentUnit();
+    this.updateCertificateUI();
+
+    // Event listeners
+    window.addEventListener('keydown', (e) => {
+      if (this.currentTab === 'games' && this.currentMiniGame === 'spelling') {
+        if (e.key === 'Backspace') {
+          this.deleteSpellingLetter();
+        }
+      }
+    });
+  }
+
+  updateUserUI() {
+    const avatarEl = document.getElementById('user-avatar-display');
+    const nameEl = document.getElementById('user-name-display');
+    const starsEl = document.getElementById('user-stars-display');
+    const headerMascot = document.getElementById('header-mascot');
+
+    if (avatarEl) avatarEl.textContent = this.userData.avatar;
+    if (headerMascot) headerMascot.textContent = this.userData.avatar;
+    if (nameEl) nameEl.textContent = this.userData.name;
+    if (starsEl) starsEl.textContent = this.userData.stars;
+  }
+
+  addStars(amount) {
+    this.userData.stars += amount;
+    sounds.playStar();
+    this.saveUserData();
+  }
+
+  unlockBadge(badgeId) {
+    if (!this.userData.unlockedBadges.includes(badgeId)) {
+      this.userData.unlockedBadges.push(badgeId);
+      this.saveUserData();
+      this.renderAchievements();
+      sounds.playFanfare();
+      if (window.confetti) confetti.fire(2500);
+    }
+  }
+
+  toggleSound() {
+    const enabled = sounds.toggleSound();
+    const btn = document.getElementById('btn-toggle-sound');
+    if (btn) btn.textContent = enabled ? '🔊' : '🔇';
+    if (enabled) sounds.playClick();
+  }
+
+  showMascotTip() {
+    this.showNextMascotTip();
+  }
+
+  showNextMascotTip() {
+    this.currentTipIndex = (this.currentTipIndex + 1) % this.mascotTips.length;
+    const bubble = document.getElementById('mascot-floating-text');
+    if (bubble) {
+      bubble.textContent = this.mascotTips[this.currentTipIndex];
+      bubble.style.animation = 'none';
+      setTimeout(() => bubble.style.animation = 'floatBubble 4s infinite ease-in-out', 10);
+    }
+    sounds.playClick();
+  }
+
+  // เปลี่ยนแท็บหลัก
+  switchTab(tabId) {
+    sounds.playClick();
+    this.currentTab = tabId;
+
+    // อัปเดตปุ่มแท็บ
+    document.querySelectorAll('.nav-tab-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.tab === tabId);
+    });
+
+    // ซ่อน/แสดงหน้าแท็บ
+    document.querySelectorAll('.tab-content').forEach(tab => {
+      tab.classList.remove('active');
+    });
+    const targetTab = document.getElementById(`tab-${tabId}`);
+    if (targetTab) targetTab.classList.add('active');
+
+    // ควบคุมการแสดง Selector Bar
+    const selectorBar = document.getElementById('unit-selector-bar');
+    if (selectorBar) {
+      selectorBar.style.display = (tabId === 'units' || tabId === 'achievements') ? 'none' : 'flex';
+    }
+
+    // เรียกโหลดข้อมูลเฉพาะของแท็บนั้นๆ
+    if (tabId === 'flashcards') {
+      this.renderFlashcards();
+      this.renderGrammarTip();
+    } else if (tabId === 'dialogue') {
+      this.renderDialogue();
+    } else if (tabId === 'games') {
+      this.renderMiniGame();
+    } else if (tabId === 'quiz') {
+      this.initQuiz();
+    } else if (tabId === 'achievements') {
+      this.renderAchievements();
+      this.updateCertificateUI();
+    }
+  }
+
+  // เปลี่ยนหน่วยการเรียนรู้
+  changeUnit(unitId) {
+    sounds.playClick();
+    this.currentUnitId = parseInt(unitId);
+    const dropdown = document.getElementById('unit-dropdown');
+    if (dropdown) dropdown.value = this.currentUnitId;
+
+    this.renderCurrentUnit();
+
+    if (this.currentTab === 'flashcards') {
+      this.renderFlashcards();
+      this.renderGrammarTip();
+    } else if (this.currentTab === 'dialogue') {
+      this.renderDialogue();
+    } else if (this.currentTab === 'games') {
+      this.renderMiniGame();
+    } else if (this.currentTab === 'quiz') {
+      this.initQuiz();
+    }
+  }
+
+  getCurrentUnit() {
+    return CURRICULUM_DATA.units.find(u => u.id === this.currentUnitId) || CURRICULUM_DATA.units[0];
+  }
+
+  renderCurrentUnit() {
+    const unit = this.getCurrentUnit();
+    const iconEl = document.getElementById('current-unit-icon');
+    const titleEl = document.getElementById('current-unit-title');
+    const subTitleEl = document.getElementById('current-unit-subtitle');
+
+    if (iconEl) iconEl.textContent = unit.icon;
+    if (titleEl) titleEl.textContent = unit.title;
+    if (subTitleEl) subTitleEl.textContent = unit.titleTh;
+  }
+
+  // ===================== TAB 1: RENDER UNITS =====================
+  renderUnitsList() {
+    const container = document.getElementById('units-list-container');
+    if (!container) return;
+
+    container.innerHTML = CURRICULUM_DATA.units.map(unit => {
+      const bestScore = this.userData.completedQuizzes[unit.id];
+      const scoreBadge = bestScore !== undefined 
+        ? `<span style="color:#059669;">⭐ สอบผ่าน (${bestScore}/5)</span>` 
+        : `<span>ยังไม่ได้สอบ</span>`;
+
+      return `
+        <div class="unit-card" style="--card-accent: ${unit.themeColor};" onclick="app.startUnitDirectly(${unit.id})">
+          <div class="unit-card-header">
+            <div class="unit-card-icon">${unit.icon}</div>
+            <div class="unit-card-title">
+              <h3>${unit.title}</h3>
+              <div class="th-title">${unit.titleTh}</div>
+            </div>
+          </div>
+          <div class="unit-card-desc">${unit.description}</div>
+          <div class="unit-card-meta">
+            <span class="unit-badge-count">📝 ${unit.words.length} คำศัพท์</span>
+            ${scoreBadge}
+            <button class="btn-start-unit" onclick="event.stopPropagation(); app.startUnitDirectly(${unit.id})">เข้าสู่บทเรียน ➔</button>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  startUnitDirectly(unitId) {
+    this.changeUnit(unitId);
+    this.switchTab('flashcards');
+  }
+
+  // ===================== TAB 2: FLASHCARDS =====================
+  renderFlashcards(filterQuery = '') {
+    const container = document.getElementById('flashcards-container');
+    if (!container) return;
+
+    const unit = this.getCurrentUnit();
+    const query = filterQuery.trim().toLowerCase();
+
+    const filteredWords = unit.words.filter(w => {
+      if (!query) return true;
+      return w.word.toLowerCase().includes(query) || 
+             w.thai.includes(query) || 
+             w.phonetic.includes(query);
+    });
+
+    if (filteredWords.length === 0) {
+      container.innerHTML = `
+        <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #64748b; font-family: var(--font-thai);">
+          🔍 ไม่พบคำศัพท์ที่ตรงกับการค้นหา ลองพิมพ์คำอื่นดูนะครับ
+        </div>
+      `;
+      return;
+    }
+
+    container.innerHTML = filteredWords.map(w => `
+      <div class="word-card" id="card-${w.id}">
+        <div class="word-card-emoji">${w.emoji}</div>
+        <div class="word-card-word">${w.word}</div>
+        <div class="word-card-phonetic">${w.phonetic} <span style="font-size:0.75rem; color:#64748b;">(${w.type})</span></div>
+        <div class="word-card-thai">${w.thai}</div>
+
+        <div class="word-card-example">
+          <div class="en">${w.exampleEn}</div>
+          <div class="th">${w.exampleTh}</div>
+        </div>
+
+        <div class="word-card-actions">
+          <button class="btn-speak-word" onclick="app.speakWord('${w.word.replace(/'/g, "\\'")}')" title="ฟังการออกเสียง">
+            <span>🔊 ฟังเสียง</span>
+          </button>
+          <button class="btn-speak-slow" onclick="app.speakWordSlow('${w.word.replace(/'/g, "\\'")}')" title="ฟังช้าๆ ชัดๆ">
+            🐢 ช้า
+          </button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  filterWords(query) {
+    this.renderFlashcards(query);
+  }
+
+  speakWord(text) {
+    sounds.ensureContextRunning();
+    sounds.playClick();
+    sounds.speak(text);
+  }
+
+  speakWordSlow(text) {
+    sounds.ensureContextRunning();
+    sounds.playClick();
+    if (!('speechSynthesis' in window)) return;
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'en-US';
+    utterance.rate = 0.6; // ช้าชัดเจน
+    if (sounds.preferredVoice) utterance.voice = sounds.preferredVoice;
+    window.speechSynthesis.speak(utterance);
+  }
+
+  toggleGrammarBox() {
+    sounds.playClick();
+    const box = document.getElementById('grammar-tip-box');
+    if (box) box.classList.toggle('show');
+  }
+
+  renderGrammarTip() {
+    const box = document.getElementById('grammar-tip-box');
+    if (!box) return;
+    const unit = this.getCurrentUnit();
+    if (!unit.grammarTip) {
+      box.innerHTML = '';
+      return;
+    }
+
+    box.innerHTML = `
+      <h3>💡 ${unit.grammarTip.title} (${unit.grammarTip.titleTh})</h3>
+      ${unit.grammarTip.rules.map(rule => `
+        <div class="grammar-rule-item">
+          <div class="grammar-rule-point">• ${rule.point}</div>
+          <div class="grammar-rule-example">👉 <strong>ตัวอย่าง:</strong> ${rule.example}</div>
+        </div>
+      `).join('')}
+    `;
+  }
+
+  // ===================== TAB 3: DIALOGUE LAB =====================
+  renderDialogue() {
+    const unit = this.getCurrentUnit();
+    const titleEn = document.getElementById('dialogue-title-en');
+    const titleTh = document.getElementById('dialogue-title-th');
+    const speakersList = document.getElementById('dialogue-speakers-list');
+    const chatList = document.getElementById('dialogue-chat-list');
+
+    if (!unit.dialogue) return;
+
+    if (titleEn) titleEn.textContent = unit.dialogue.title;
+    if (titleTh) titleTh.textContent = unit.dialogue.titleTh;
+
+    if (speakersList) {
+      speakersList.innerHTML = unit.dialogue.speakers.map(s => `
+        <div class="speaker-badge">
+          <span>${s.avatar}</span>
+          <span>${s.name} (${s.role})</span>
+        </div>
+      `).join('');
+    }
+
+    if (chatList) {
+      chatList.innerHTML = unit.dialogue.lines.map((line, idx) => {
+        const isSecondSpeaker = line.speaker === unit.dialogue.speakers[1]?.name;
+        const speakerObj = unit.dialogue.speakers.find(s => s.name === line.speaker) || { avatar: '💬' };
+
+        return `
+          <div class="chat-bubble-row ${isSecondSpeaker ? 'right' : ''}" id="chat-row-${idx}">
+            <div class="chat-avatar">${speakerObj.avatar}</div>
+            <div class="chat-bubble ${isSecondSpeaker ? 'right-bubble' : ''}" onclick="app.speakDialogueLine(${idx}, '${line.text.replace(/'/g, "\\'")}')">
+              <div class="chat-text-en">🔊 ${line.text}</div>
+              <div class="chat-text-th">${line.textTh}</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+  }
+
+  speakDialogueLine(idx, text) {
+    sounds.playClick();
+    document.querySelectorAll('.chat-bubble').forEach(b => b.classList.remove('speaking-now'));
+    const targetRow = document.getElementById(`chat-row-${idx}`);
+    if (targetRow) {
+      const bubble = targetRow.querySelector('.chat-bubble');
+      if (bubble) bubble.classList.add('speaking-now');
+    }
+
+    sounds.speak(text, () => {
+      if (targetRow) {
+        const bubble = targetRow.querySelector('.chat-bubble');
+        if (bubble) bubble.classList.remove('speaking-now');
+      }
+    });
+  }
+
+  playFullDialogue() {
+    const unit = this.getCurrentUnit();
+    if (!unit.dialogue || !unit.dialogue.lines.length) return;
+
+    let index = 0;
+    const playNext = () => {
+      if (index >= unit.dialogue.lines.length) {
+        document.querySelectorAll('.chat-bubble').forEach(b => b.classList.remove('speaking-now'));
+        sounds.playSuccess();
+        return;
+      }
+
+      const line = unit.dialogue.lines[index];
+      document.querySelectorAll('.chat-bubble').forEach(b => b.classList.remove('speaking-now'));
+      const targetRow = document.getElementById(`chat-row-${index}`);
+      if (targetRow) {
+        const bubble = targetRow.querySelector('.chat-bubble');
+        if (bubble) bubble.classList.add('speaking-now');
+      }
+
+      sounds.speak(line.text, () => {
+        index++;
+        setTimeout(playNext, 600);
+      });
+    };
+
+    playNext();
+  }
+
+  // ===================== TAB 4: MINI GAMES =====================
+  switchMiniGame(gameKey) {
+    sounds.playClick();
+    this.currentMiniGame = gameKey;
+
+    document.querySelectorAll('.game-select-card').forEach(c => {
+      c.classList.toggle('active', c.dataset.game === gameKey);
+    });
+
+    document.getElementById('game-spelling-panel').style.display = gameKey === 'spelling' ? 'block' : 'none';
+    document.getElementById('game-memory-panel').style.display = gameKey === 'memory' ? 'block' : 'none';
+    document.getElementById('game-listening-panel').style.display = gameKey === 'listening' ? 'block' : 'none';
+
+    this.renderMiniGame();
+  }
+
+  renderMiniGame() {
+    if (this.currentMiniGame === 'spelling') {
+      this.initSpellingGame();
+    } else if (this.currentMiniGame === 'memory') {
+      this.initMemoryGame();
+    } else if (this.currentMiniGame === 'listening') {
+      this.initListeningGame();
+    }
+  }
+
+  // GAME 1: Spelling Scramble
+  initSpellingGame() {
+    const unit = this.getCurrentUnit();
+    // สุ่มคำจาก unit
+    const randomWord = unit.words[Math.floor(Math.random() * unit.words.length)];
+    this.spellingState.wordObj = randomWord;
+
+    const rawLetters = randomWord.word.toUpperCase().replace(/\s+/g, '').split('');
+    this.spellingState.letters = rawLetters;
+    this.spellingState.userLetters = [];
+    this.spellingState.usedIndices = [];
+
+    // สลับลำดับตัวอักษรสำหรับแผงปุ่ม
+    const shuffled = rawLetters.map((char, index) => ({ char, origIndex: index }))
+                               .sort(() => Math.random() - 0.5);
+    this.spellingState.shuffledPool = shuffled;
+
+    // แสดงผล UI
+    const emojiEl = document.getElementById('spelling-emoji');
+    const thaiEl = document.getElementById('spelling-thai');
+    if (emojiEl) emojiEl.textContent = randomWord.emoji;
+    if (thaiEl) thaiEl.textContent = `${randomWord.thai} (${randomWord.phonetic})`;
+
+    this.renderSpellingBoxes();
+    this.renderSpellingTiles();
+  }
+
+  speakCurrentSpellingWord() {
+    if (this.spellingState.wordObj) {
+      this.speakWord(this.spellingState.wordObj.word);
+    }
+  }
+
+  renderSpellingBoxes() {
+    const container = document.getElementById('spelling-answer-boxes');
+    if (!container) return;
+
+    container.innerHTML = this.spellingState.letters.map((_, i) => {
+      const char = this.spellingState.userLetters[i] || '';
+      return `<div class="spelling-box">${char}</div>`;
+    }).join('');
+  }
+
+  renderSpellingTiles() {
+    const container = document.getElementById('spelling-tiles-pool');
+    if (!container) return;
+
+    container.innerHTML = this.spellingState.shuffledPool.map((tile, poolIdx) => {
+      const isUsed = this.spellingState.usedIndices.includes(poolIdx);
+      return `
+        <button class="letter-tile-btn" ${isUsed ? 'disabled' : ''} onclick="app.tapSpellingTile(${poolIdx})">
+          ${tile.char}
+        </button>
+      `;
+    }).join('');
+  }
+
+  tapSpellingTile(poolIdx) {
+    sounds.playClick();
+    const tile = this.spellingState.shuffledPool[poolIdx];
+    this.spellingState.usedIndices.push(poolIdx);
+    this.spellingState.userLetters.push(tile.char);
+
+    this.renderSpellingBoxes();
+    this.renderSpellingTiles();
+
+    // เช็คว่ากรอกครบยัง
+    if (this.spellingState.userLetters.length === this.spellingState.letters.length) {
+      this.checkSpellingResult();
+    }
+  }
+
+  deleteSpellingLetter() {
+    if (this.spellingState.userLetters.length === 0) return;
+    sounds.playClick();
+    this.spellingState.userLetters.pop();
+    this.spellingState.usedIndices.pop();
+    this.renderSpellingBoxes();
+    this.renderSpellingTiles();
+  }
+
+  hintSpelling() {
+    const nextIdx = this.spellingState.userLetters.length;
+    if (nextIdx >= this.spellingState.letters.length) return;
+
+    const expectedChar = this.spellingState.letters[nextIdx];
+    // หา tile ใน shuffledPool ที่ตรงกับ expectedChar และยังไม่ถูกใช้
+    const availablePoolIdx = this.spellingState.shuffledPool.findIndex(
+      (tile, idx) => tile.char === expectedChar && !this.spellingState.usedIndices.includes(idx)
+    );
+
+    if (availablePoolIdx !== -1) {
+      this.tapSpellingTile(availablePoolIdx);
+    }
+  }
+
+  checkSpellingResult() {
+    const target = this.spellingState.letters.join('');
+    const typed = this.spellingState.userLetters.join('');
+
+    if (typed === target) {
+      sounds.playSuccess();
+      if (window.confetti) confetti.fire(1800);
+      this.addStars(2);
+      this.unlockBadge("b_spelling_star");
+
+      setTimeout(() => {
+        this.nextSpellingWord();
+      }, 1400);
+    } else {
+      sounds.playError();
+      setTimeout(() => {
+        // เคลียร์ให้ลองใหม่
+        this.spellingState.userLetters = [];
+        this.spellingState.usedIndices = [];
+        this.renderSpellingBoxes();
+        this.renderSpellingTiles();
+      }, 700);
+    }
+  }
+
+  nextSpellingWord() {
+    sounds.playClick();
+    this.initSpellingGame();
+  }
+
+  // GAME 2: Memory Matching
+  initMemoryGame() {
+    const unit = this.getCurrentUnit();
+    const wordsPool = [...unit.words].sort(() => Math.random() - 0.5).slice(0, 6); // เลือกมา 6 คำ (12 การ์ด)
+
+    const cards = [];
+    wordsPool.forEach((w, idx) => {
+      // การ์ดภาษาอังกฤษ
+      cards.push({
+        id: `en_${idx}`,
+        matchId: idx,
+        content: `${w.emoji}<br>${w.word}`,
+        type: 'en'
+      });
+      // การ์ดภาษาไทย
+      cards.push({
+        id: `th_${idx}`,
+        matchId: idx,
+        content: `${w.thai}`,
+        type: 'th'
+      });
+    });
+
+    cards.sort(() => Math.random() - 0.5);
+
+    this.memoryState = {
+      cards,
+      flippedCards: [],
+      matchedCount: 0,
+      totalPairs: wordsPool.length,
+      locked: false
+    };
+
+    const grid = document.getElementById('memory-cards-grid');
+    if (!grid) return;
+
+    grid.innerHTML = cards.map((c, i) => `
+      <div class="memory-card" id="mem-card-${i}" onclick="app.flipMemoryCard(${i})">
+        ❓
+      </div>
+    `).join('');
+  }
+
+  flipMemoryCard(idx) {
+    if (this.memoryState.locked) return;
+    const cardEl = document.getElementById(`mem-card-${idx}`);
+    if (!cardEl || cardEl.classList.contains('flipped') || cardEl.classList.contains('matched')) return;
+
+    sounds.playClick();
+    cardEl.classList.add('flipped');
+    cardEl.innerHTML = this.memoryState.cards[idx].content;
+    this.memoryState.flippedCards.push(idx);
+
+    if (this.memoryState.flippedCards.length === 2) {
+      this.checkMemoryMatch();
+    }
+  }
+
+  checkMemoryMatch() {
+    this.memoryState.locked = true;
+    const [idx1, idx2] = this.memoryState.flippedCards;
+    const card1 = this.memoryState.cards[idx1];
+    const card2 = this.memoryState.cards[idx2];
+
+    if (card1.matchId === card2.matchId) {
+      // ถูกต้อง
+      sounds.playSuccess();
+      setTimeout(() => {
+        const el1 = document.getElementById(`mem-card-${idx1}`);
+        const el2 = document.getElementById(`mem-card-${idx2}`);
+        if (el1) el1.classList.add('matched');
+        if (el2) el2.classList.add('matched');
+
+        this.memoryState.matchedCount++;
+        this.memoryState.flippedCards = [];
+        this.memoryState.locked = false;
+
+        if (this.memoryState.matchedCount === this.memoryState.totalPairs) {
+          sounds.playFanfare();
+          if (window.confetti) confetti.fire(3000);
+          this.addStars(5);
+          this.unlockBadge("b_speed_match");
+        }
+      }, 500);
+    } else {
+      // ไม่ตรงกัน
+      sounds.playError();
+      setTimeout(() => {
+        const el1 = document.getElementById(`mem-card-${idx1}`);
+        const el2 = document.getElementById(`mem-card-${idx2}`);
+        if (el1) {
+          el1.classList.remove('flipped');
+          el1.textContent = '❓';
+        }
+        if (el2) {
+          el2.classList.remove('flipped');
+          el2.textContent = '❓';
+        }
+        this.memoryState.flippedCards = [];
+        this.memoryState.locked = false;
+      }, 1000);
+    }
+  }
+
+  // GAME 3: Listening Quiz
+  initListeningGame() {
+    const unit = this.getCurrentUnit();
+    const targetWord = unit.words[Math.floor(Math.random() * unit.words.length)];
+    const otherWords = unit.words.filter(w => w.id !== targetWord.id)
+                                 .sort(() => Math.random() - 0.5)
+                                 .slice(0, 3);
+    const options = [targetWord, ...otherWords].sort(() => Math.random() - 0.5);
+
+    this.listeningState = {
+      targetWord,
+      options,
+      answered: false
+    };
+
+    const grid = document.getElementById('listen-options-grid');
+    if (!grid) return;
+
+    grid.innerHTML = options.map((opt, i) => `
+      <div class="listen-option-card" id="listen-opt-${i}" onclick="app.pickListeningOption(${i})">
+        <div style="font-size: 2.8rem;">${opt.emoji}</div>
+        <div style="font-size: 1.2rem; font-weight: 800; color: #1e3a8a;">${opt.word}</div>
+        <div style="font-family: var(--font-thai); color: #64748b;">${opt.thai}</div>
+      </div>
+    `).join('');
+
+    // เล่นเสียงทันทีหลังจากโหลด 300ms
+    setTimeout(() => {
+      this.playListeningAudio();
+    }, 400);
+  }
+
+  playListeningAudio() {
+    if (this.listeningState.targetWord) {
+      sounds.ensureContextRunning();
+      sounds.speak(this.listeningState.targetWord.word);
+    }
+  }
+
+  pickListeningOption(idx) {
+    if (this.listeningState.answered) return;
+    this.listeningState.answered = true;
+
+    const chosen = this.listeningState.options[idx];
+    const isCorrect = chosen.id === this.listeningState.targetWord.id;
+    const cardEl = document.getElementById(`listen-opt-${idx}`);
+
+    if (isCorrect) {
+      if (cardEl) cardEl.classList.add('correct');
+      sounds.playSuccess();
+      this.addStars(2);
+      this.unlockBadge("b_listen_master");
+      setTimeout(() => {
+        this.initListeningGame();
+      }, 1500);
+    } else {
+      if (cardEl) cardEl.classList.add('wrong');
+      sounds.playError();
+      // ไฮไลท์ตัวที่ถูกให้เห็น
+      const correctIdx = this.listeningState.options.findIndex(o => o.id === this.listeningState.targetWord.id);
+      const correctEl = document.getElementById(`listen-opt-${correctIdx}`);
+      if (correctEl) correctEl.classList.add('correct');
+
+      setTimeout(() => {
+        this.initListeningGame();
+      }, 2000);
+    }
+  }
+
+  // ===================== TAB 5: UNIT QUIZ =====================
+  initQuiz() {
+    const unit = this.getCurrentUnit();
+    this.quizState = {
+      questions: unit.quiz || [],
+      currentIndex: 0,
+      score: 0,
+      selectedAnswer: null,
+      answered: false
+    };
+
+    document.getElementById('quiz-active-view').style.display = 'block';
+    document.getElementById('quiz-result-view').style.display = 'none';
+
+    this.renderQuizQuestion();
+  }
+
+  renderQuizQuestion() {
+    const q = this.quizState.questions[this.quizState.currentIndex];
+    if (!q) return;
+
+    this.quizState.answered = false;
+    this.quizState.selectedAnswer = null;
+
+    // Progress bar
+    const progress = ((this.quizState.currentIndex + 1) / this.quizState.questions.length) * 100;
+    const progBar = document.getElementById('quiz-progress-bar');
+    if (progBar) progBar.style.width = `${progress}%`;
+
+    // Title
+    const qNum = document.getElementById('quiz-q-num');
+    const qTitle = document.getElementById('quiz-q-title');
+    const qThai = document.getElementById('quiz-q-thai');
+    if (qNum) qNum.textContent = `ข้อที่ ${this.quizState.currentIndex + 1} / ${this.quizState.questions.length}`;
+    if (qTitle) qTitle.textContent = q.question;
+    if (qThai) qThai.textContent = q.questionTh;
+
+    // Options
+    const optContainer = document.getElementById('quiz-options-container');
+    if (optContainer) {
+      optContainer.innerHTML = q.options.map((opt, i) => `
+        <button class="quiz-option-btn" id="quiz-opt-${i}" onclick="app.selectQuizAnswer(${i})">
+          <span>${String.fromCharCode(65 + i)}. ${opt}</span>
+          <span class="opt-status-icon"></span>
+        </button>
+      `).join('');
+    }
+
+    // Feedback box & Next button
+    const feedbackBox = document.getElementById('quiz-feedback-box');
+    const nextBtn = document.getElementById('btn-quiz-next');
+    if (feedbackBox) {
+      feedbackBox.classList.remove('show');
+      feedbackBox.innerHTML = '';
+    }
+    if (nextBtn) nextBtn.style.display = 'none';
+  }
+
+  selectQuizAnswer(index) {
+    if (this.quizState.answered) return;
+    this.quizState.answered = true;
+    this.quizState.selectedAnswer = index;
+
+    const q = this.quizState.questions[this.quizState.currentIndex];
+    const isCorrect = index === q.answer;
+    const clickedBtn = document.getElementById(`quiz-opt-${index}`);
+
+    if (isCorrect) {
+      sounds.playSuccess();
+      this.quizState.score++;
+      if (clickedBtn) clickedBtn.classList.add('selected-correct');
+    } else {
+      sounds.playError();
+      if (clickedBtn) clickedBtn.classList.add('selected-wrong');
+      const correctBtn = document.getElementById(`quiz-opt-${q.answer}`);
+      if (correctBtn) correctBtn.classList.add('selected-correct');
+    }
+
+    // แสดงคำอธิบาย
+    const feedbackBox = document.getElementById('quiz-feedback-box');
+    if (feedbackBox) {
+      feedbackBox.classList.add('show');
+      feedbackBox.innerHTML = `
+        <strong>${isCorrect ? '🎉 เก่งมาก ตอบถูกต้อง!' : '💡 คำอธิบาย:'}</strong> ${q.explanation}
+      `;
+    }
+
+    const nextBtn = document.getElementById('btn-quiz-next');
+    if (nextBtn) {
+      nextBtn.style.display = 'block';
+      if (this.quizState.currentIndex === this.quizState.questions.length - 1) {
+        nextBtn.textContent = 'ดูผลคะแนน 🏆';
+      } else {
+        nextBtn.textContent = 'ข้อถัดไป ➔';
+      }
+    }
+  }
+
+  nextQuizQuestion() {
+    sounds.playClick();
+    this.quizState.currentIndex++;
+    if (this.quizState.currentIndex < this.quizState.questions.length) {
+      this.renderQuizQuestion();
+    } else {
+      this.finishQuiz();
+    }
+  }
+
+  finishQuiz() {
+    document.getElementById('quiz-active-view').style.display = 'none';
+    document.getElementById('quiz-result-view').style.display = 'block';
+
+    const score = this.quizState.score;
+    const total = this.quizState.questions.length;
+
+    // บันทึกคะแนน
+    const prevScore = this.userData.completedQuizzes[this.currentUnitId] || 0;
+    if (score > prevScore) {
+      this.userData.completedQuizzes[this.currentUnitId] = score;
+    }
+
+    // มอบดาว
+    this.addStars(score * 2);
+
+    // ตรวจสอบปลดล็อกเหรียญ
+    if (score === total) {
+      this.unlockBadge("b_quiz_champ");
+    }
+    if (this.currentUnitId === 1 && score >= 3) this.unlockBadge("b_daily_routine");
+    if (this.currentUnitId === 2 && score >= 3) this.unlockBadge("b_school_star");
+    if (this.currentUnitId === 3 && score >= 3) this.unlockBadge("b_dream_job");
+
+    // ถ้าทำครบทุกบท
+    const passedAll = CURRICULUM_DATA.units.every(u => (this.userData.completedQuizzes[u.id] || 0) >= 3);
+    if (passedAll) {
+      this.unlockBadge("b_all_rounder");
+    }
+
+    this.saveUserData();
+
+    // แสดงผลคะแนน
+    const scoreEl = document.getElementById('quiz-result-score');
+    const starsEl = document.getElementById('quiz-result-stars');
+    const msgEl = document.getElementById('quiz-result-msg');
+    const emojiEl = document.getElementById('quiz-result-emoji');
+
+    if (scoreEl) scoreEl.textContent = `${score} / ${total}`;
+    if (starsEl) starsEl.textContent = '⭐'.repeat(score) + '☆'.repeat(total - score);
+
+    if (score === 5) {
+      sounds.playFanfare();
+      if (window.confetti) confetti.fire(3500);
+      if (emojiEl) emojiEl.textContent = '🏆';
+      if (msgEl) msgEl.textContent = 'สุดยอดมากๆ เลย! ได้คะแนนเต็ม 5/5 เก่งภาษาอังกฤษระดับเซียนแล้ว!';
+    } else if (score >= 3) {
+      sounds.playFanfare();
+      if (window.confetti) confetti.fire(2000);
+      if (emojiEl) emojiEl.textContent = '🎉';
+      if (msgEl) msgEl.textContent = 'ยอดเยี่ยมมาก! สอบผ่านเกณฑ์แล้ว ฝึกฝนต่อไปนะ!';
+    } else {
+      if (emojiEl) emojiEl.textContent = '💪';
+      if (msgEl) msgEl.textContent = 'พยายามได้ดีมาก! ลองทบทวนคำศัพท์ในการ์ดแล้วมาทดสอบใหม่อีกครั้งนะ!';
+    }
+
+    this.renderUnitsList();
+  }
+
+  restartQuiz() {
+    sounds.playClick();
+    this.initQuiz();
+  }
+
+  // ===================== TAB 6: ACHIEVEMENTS & CERTIFICATE =====================
+  renderAchievements() {
+    const container = document.getElementById('achievements-badges-container');
+    if (!container) return;
+
+    container.innerHTML = CURRICULUM_DATA.badges.map(b => {
+      const isUnlocked = this.userData.unlockedBadges.includes(b.id);
+      return `
+        <div class="badge-card ${isUnlocked ? '' : 'locked'}">
+          <div class="badge-card-icon">${b.icon}</div>
+          <h4>${b.name}</h4>
+          <p>${b.desc}</p>
+          <div style="margin-top: 8px; font-size: 0.8rem; font-weight: 700; color: ${isUnlocked ? '#16a34a' : '#94a3b8'};">
+            ${isUnlocked ? '✓ ปลดล็อกแล้ว' : '🔒 ล็อกอยู่'}
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  updateCertificateUI() {
+    const nameEl = document.getElementById('cert-student-name-text');
+    const schoolEl = document.getElementById('cert-school-text');
+    const dateEl = document.getElementById('cert-date-text');
+
+    if (nameEl) nameEl.textContent = `${this.userData.name} (${this.userData.classroom})`;
+    if (schoolEl) schoolEl.textContent = this.userData.school;
+
+    if (dateEl) {
+      const today = new Date();
+      const thaiMonths = [
+        "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
+        "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
+      ];
+      const thaiDate = `วันที่ ${today.getDate()} ${thaiMonths[today.getMonth()]} พ.ศ. ${today.getFullYear() + 543}`;
+      dateEl.textContent = thaiDate;
+    }
+  }
+
+  // ===================== PROFILE MODAL =====================
+  openProfileModal() {
+    sounds.playClick();
+    const modal = document.getElementById('profile-modal');
+    const nameInput = document.getElementById('input-student-name');
+    const classInput = document.getElementById('input-student-class');
+    const schoolInput = document.getElementById('input-school-name');
+
+    if (nameInput) nameInput.value = this.userData.name;
+    if (classInput) classInput.value = this.userData.classroom;
+    if (schoolInput) schoolInput.value = this.userData.school;
+
+    this.selectAvatar(this.userData.avatar);
+
+    if (modal) modal.classList.add('open');
+  }
+
+  closeProfileModal() {
+    sounds.playClick();
+    const modal = document.getElementById('profile-modal');
+    if (modal) modal.classList.remove('open');
+  }
+
+  selectAvatar(avatarChar) {
+    this.selectedAvatar = avatarChar;
+    document.querySelectorAll('.avatar-opt').forEach(opt => {
+      opt.classList.toggle('selected', opt.textContent.trim() === avatarChar);
+    });
+  }
+
+  saveProfile() {
+    sounds.playSuccess();
+    const nameInput = document.getElementById('input-student-name');
+    const classInput = document.getElementById('input-student-class');
+    const schoolInput = document.getElementById('input-school-name');
+
+    if (nameInput && nameInput.value.trim()) {
+      this.userData.name = nameInput.value.trim();
+    }
+    if (classInput && classInput.value.trim()) {
+      this.userData.classroom = classInput.value.trim();
+    }
+    if (schoolInput && schoolInput.value.trim()) {
+      this.userData.school = schoolInput.value.trim();
+    }
+    if (this.selectedAvatar) {
+      this.userData.avatar = this.selectedAvatar;
+    }
+
+    this.saveUserData();
+    this.updateCertificateUI();
+    this.closeProfileModal();
+  }
+}
+
+// เริ่มการทำงานเมื่อหน้าเว็บพร้อม
+let app = null;
+window.addEventListener('DOMContentLoaded', () => {
+  app = new EnglishApp();
+});
+
+</script>
+</body>
+</html>
